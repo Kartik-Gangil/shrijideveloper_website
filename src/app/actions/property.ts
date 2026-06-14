@@ -8,12 +8,13 @@ export async function bookVisit(formData: FormData) {
     const name = formData.get('name');
     const phone = formData.get('phone');
 
-    console.log(name, phone);
-
     await connectToDatabase();
+    if (!name || !phone) {
+        return new Response("Missing fields", { status: 400 });
+    }
     const newUser = await UserModel.create({
-        name,
-        phone,
+        name: String(name),
+        phone: String(phone),
     });
     if (newUser) {
         redirect("/thankyou")
