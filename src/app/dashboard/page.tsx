@@ -61,7 +61,7 @@ export default function AdminPropertyDashboard() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <section className="min-h-screen bg-[#F7F4F1] mt-15 p-6 lg:p-10">
         {loader && <Loader />}
         <div className="max-w-7xl mx-auto">
@@ -187,8 +187,8 @@ export default function AdminPropertyDashboard() {
 
                   <span
                     className={`px-4 py-2 rounded-full text-sm ${item.status === "available"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-gray-100 text-gray-600"}
+                      ? "bg-green-100 text-green-700"
+                      : "bg-gray-100 text-gray-600"}
 
 `}
                   >

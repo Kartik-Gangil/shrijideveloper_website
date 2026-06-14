@@ -102,7 +102,7 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
           </a>
           <button
             title="user"
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/auth/login")}
             className={`pb-1 transition-all cursor-pointer border-b-2 hover:text-secondary-green "text-[#554336] border-transparent hover:border-[#dbc2b0]"
               }`}
           >

@@ -14,9 +14,10 @@ import Image from 'next/image';
 import Loader from '@/components/loader';
 
 export default function EditPropertyPage() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = Array.isArray(params.id) ? params.id[0] : params.id ?? '';
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [propertyData, setPropertyData] = useState<PropertyForm>({
     title: '',
@@ -37,6 +38,7 @@ export default function EditPropertyPage() {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
+        setLoading(true)
         const res = await fetch(`/api/properties?id=${id}`);
 
         if (!res.ok) {
@@ -85,6 +87,7 @@ export default function EditPropertyPage() {
 
   const handleUpdate = async () => {
     try {
+      setLoading(true)
       const formData = new FormData();
 
       formData.append("id", id);
@@ -151,6 +154,7 @@ export default function EditPropertyPage() {
         await res.json();
 
       if (!res.ok) {
+        setLoading(false)
         throw new Error(
           data.message
         );
@@ -161,11 +165,11 @@ export default function EditPropertyPage() {
       );
 
       router.push(
-        "/dashboard/properties"
+        "/dashboard"
       );
     } catch (error) {
       console.error(error);
-
+setLoading(false)
       alert(
         error instanceof Error
           ? error.message
@@ -174,12 +178,10 @@ export default function EditPropertyPage() {
     }
   };
 
-  if (loading) {
-    return <Loader/>;
-  }
 
   return (
     <>
+      {loading && <Loader/>}
       <Navbar />
 
       <section className="bg-[#F7F4F1] min-h-screen py-12 my-8 px-5">

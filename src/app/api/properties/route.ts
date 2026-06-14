@@ -4,28 +4,6 @@ import { deleteCloudinaryImage, uploadToCloudinary } from "@/utils/UploadFunctio
 import { NextResponse } from "next/server";
 
 
-function getPublicIdFromUrl(url: string) {
-    try {
-        const afterUpload = url.split("/upload/")[1];
-
-        if (!afterUpload) return null;
-
-        const pathWithoutVersion = afterUpload.replace(
-            /^v\d+\//,
-            ""
-        );
-
-        return pathWithoutVersion.substring(
-            0,
-            pathWithoutVersion.lastIndexOf(".")
-        );
-    } catch {
-        return null;
-    }
-}
-
-
-
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
@@ -226,7 +204,7 @@ export async function PUT(request: Request) {
          * STEP 1:
          * Find removed images
          */
-        const removedImages = property.images.filter(
+        const removedImages = property?.images?.filter(
             (url: string) =>
                 !existingImages.includes(url)
         );
