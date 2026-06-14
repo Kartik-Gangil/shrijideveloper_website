@@ -204,7 +204,7 @@ export async function PUT(request: Request) {
          * STEP 1:
          * Find removed images
          */
-        const removedImages = property?.images?.filter(
+        const removedImages = (property.images ?? []).filter(
             (url: string) =>
                 !existingImages.includes(url)
         );

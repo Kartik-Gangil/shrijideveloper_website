@@ -48,6 +48,7 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit}>
                 <label className="block mb-2">Email</label>
                 <input
+                    title="email"
                     className="w-full mb-3 p-2 border rounded"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -57,6 +58,7 @@ export default function LoginPage() {
 
                 <label className="block mb-2">Password</label>
                 <input
+                    title="password"
                     className="w-full mb-3 p-2 border rounded"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

@@ -152,6 +152,7 @@ export default function PropertyListingPage() {
                         />
 
                         <select
+                            title="priceFilter"
                             className="w-full p-3 rounded-xl border text-sm"
                             value={priceFilter}
                             onChange={(e) => setPriceFilter(e.target.value)}
@@ -163,6 +164,7 @@ export default function PropertyListingPage() {
                         </select>
 
                         <select
+                            title='sizeFilter'
                             className="w-full p-3 rounded-xl border text-sm"
                             value={sizeFilter}
                             onChange={(e) => setSizeFilter(e.target.value)}

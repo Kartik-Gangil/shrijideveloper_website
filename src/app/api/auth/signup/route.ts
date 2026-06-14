@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/utils/mongo";
 import AdminModel from "@/model/Admin";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import * as Watchman from "@kartikgangil/watchman_js";
+import { GenToken, hashPassword } from "@kartikgangil/watchman_js";
 
 export async function POST(request: Request) {
     try {
@@ -21,23 +19,13 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Admin already exists", status: 409 });
         }
 
-        const hashed = await bcrypt.hash(password, 10);
+        const hashed = await hashPassword(password);
         const newAdmin = await AdminModel.create({ email: normalizedEmail, password: hashed });
 
         // generate token
         const secret = process.env.JWT_SECRET || "dev_secret";
-        const token = jwt.sign({ id: newAdmin._id.toString(), email: newAdmin.email }, secret, { expiresIn: "7d" });
-
-        // try to register with watchman (best-effort)
-        try {
-            // @ts-ignore
-            if (Watchman && typeof Watchman.register === 'function') {
-                // @ts-ignore
-                await Watchman.register({ id: newAdmin._id.toString(), email: newAdmin.email });
-            }
-        } catch (e) {
-            console.warn('Watchman register failed', e);
-        }
+        const token = await GenToken({ id: newAdmin._id.toString(), email: newAdmin.email }, { expiresIn: "7d" }, secret);
+        console.log('Generated signup token:', token);
 
         return NextResponse.json({ success: true, token, status: 201 });
     } catch (error) {
