@@ -5,6 +5,8 @@ import Notification from "./Notification";
 
 interface ContactProps {
   language: Language;
+  prefilledProject?: string;
+  onClearPrefill?: () => void;
 }
 interface User {
   name: string;

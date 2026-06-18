@@ -6,15 +6,32 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Navbar from "../properties/component/Navbar";
 
+interface Plot {
+  _id: string;
+  images: string[];
+  title: string;
+  description: string;
+  price: string;
+  address: string;
+  status: string;
+}
+
+interface DashboardData {
+  plot: Plot[];
+  PlotCount: number;
+  UsersCount: number;
+  totalValue: number;
+}
+
 export default function AdminPropertyDashboard() {
 
-  const [dataFrame, setDataFrame] = useState({
+  const [dataFrame, setDataFrame] = useState<DashboardData>({
     plot: [],
     PlotCount: 0,
     UsersCount: 0,
-    totalValue: 0
-  })
-  const [loader, setLoader] = useState<boolean>(false)
+    totalValue: 0,
+  });
+  const [loader, setLoader] = useState<boolean>(false);
 
   const fetchData = async () => {
     try {

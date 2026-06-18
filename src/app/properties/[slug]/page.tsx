@@ -37,13 +37,13 @@ export default async function PropertyShowcase({ params }: PageProps) {
         notFound();
     }
 
-    const handleSubmit = () => {
-        try {
+    // const handleSubmit = () => {
+    //     try {
 
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     return (
         <div className="bg-[#F6F5F3] min-h-screen">
@@ -310,12 +310,14 @@ export default async function PropertyShowcase({ params }: PageProps) {
                                     name="name"
                                     placeholder="Your Name"
                                     className="w-full border rounded-xl p-4"
+                                    required
                                 />
 
                                 <input
                                     name="phone"
                                     placeholder="+91 00000 00000"
                                     className="w-full border rounded-xl p-4"
+                                    required
                                 />
 
                                 <button type="submit"

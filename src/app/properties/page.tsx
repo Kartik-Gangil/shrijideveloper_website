@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation';
 interface properties {
     id: string;
     title: string;
-    amenities: [];
+    amenities: string[];
     address: string;
     area: number;
     description: string;
-    images: [];
+    images: string[];
     listedAt: string;
     price: number;
     status: string;

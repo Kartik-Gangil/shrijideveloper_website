@@ -89,11 +89,9 @@ export default function Navbar() {
                             {navItems.map((item) => (
                                 <button
                                     key={item.id}
-                                    onClick={() => handleNavClick(item.id)}
-                                    className={`text-left py-2 hover:text-secondary-green border-b border-[#dbc2b0]/10 ${activeSection === item.id
-                                        ? "text-secondary-green font-bold"
-                                        : "text-[#554336]"
-                                        }`}
+                                    onClick={() => handleNavClick(item.path)}
+                                    className={`text-left py-2 hover:text-secondary-green border-b border-[#dbc2b0]/10  text-secondary-green font-bold
+                                    `}
                                 >
                                     {item.label}
                                 </button>

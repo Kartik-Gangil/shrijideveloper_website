@@ -28,8 +28,11 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
   ];
 
   const handleNavClick = (id: string) => {
-    onNavigate(id);
     setIsOpen(false);
+
+    setTimeout(() => {
+      onNavigate?.(id);
+    }, 100);
   };
 
   return (
@@ -141,6 +144,13 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
                   {item.label}
                 </button>
               ))}
+              <button
+                
+                onClick={() => router.push("/properties")}
+                className={`text-left py-2 hover:text-secondary-green border-b border-[#dbc2b0]/1 text-[#554336]`}
+              >
+                Properties
+              </button>
               <div className="pt-2 text-center text-xs text-[#554336]/60">
                 {t.verifiedLayouts}
               </div>
