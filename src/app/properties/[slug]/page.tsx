@@ -148,7 +148,7 @@ export default async function PropertyShowcase({ params }: PageProps) {
 
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
 
-                                {property?.amenities?.map((item , i) => (
+                                {property?.amenities?.map((item, i) => (
 
                                     <div
                                         key={i}
@@ -272,7 +272,7 @@ export default async function PropertyShowcase({ params }: PageProps) {
                             <div className="bg-white rounded-3xl overflow-hidden shadow">
 
                                 <Image
-                                    src="/map.png"
+                                    src="https://res.cloudinary.com/drd6gndvh/image/upload/f_auto,q_auto,w_800/v1781807042/copy_of_map_ewtvp3.webp"
                                     className="w-full h-full object-cover"
                                     alt="area map"
                                     height={10000}

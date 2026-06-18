@@ -6,7 +6,6 @@ import { useCallback } from "react"
 interface Testimonial {
     text: string;
     author: string;
-    role: string;
 }
 
 export default function TestimonialCarousel({ testimonials }: { testimonials: Testimonial[] }) {
@@ -80,12 +79,6 @@ export default function TestimonialCarousel({ testimonials }: { testimonials: Te
                                             {testimonial.author}
 
                                         </h3>
-
-                                        <p className="text-[#777] sm:text-sm">
-
-                                            {testimonial.role}
-
-                                        </p>
 
                                     </div>
 

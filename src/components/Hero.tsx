@@ -1,6 +1,7 @@
 import { Verified, ArrowRight, Download } from "lucide-react";
 import { motion } from "motion/react";
 import { translations, Language } from "../utils/translation";
+import { useRouter } from "next/navigation";
 
 interface HeroProps {
   onExplore: () => void;
@@ -10,7 +11,7 @@ interface HeroProps {
 
 export default function Hero({ onExplore, onOpenBrochure, language }: HeroProps) {
   const t = translations[language].hero;
-
+const router = useRouter()
   return (
     <section className="relative min-h-[92vh] pt-20 overflow-hidden bg-[#fdfbf7] flex items-center">
       {/* Background Section (Right Side on Desktop, Integrated on Mobile) */}
@@ -75,7 +76,7 @@ export default function Hero({ onExplore, onOpenBrochure, language }: HeroProps)
             className="flex flex-col sm:flex-row gap-4 pt-2"
           >
             <button 
-              onClick={onExplore}
+              onClick={() => router.push("/properties")}
               className="bg-primary-orange text-white px-8 py-4.5 organic-radius text-sm md:text-base font-bold flex items-center justify-center gap-2.5 hover:bg-primary-orange/90 active:scale-[0.98] transition-all shadow-lg shadow-primary-orange/20 cursor-pointer"
             >
               <span>{t.exploreBtn}</span>
@@ -102,11 +103,11 @@ export default function Hero({ onExplore, onOpenBrochure, language }: HeroProps)
               <p className="text-xs text-[#554336]/80">{t.statRegistry}</p>
             </div>
             <div>
-              <p className="text-xl md:text-2xl font-bold text-secondary-green">0%</p>
+              <p className="text-xl md:text-2xl font-bold text-secondary-green">24/7</p>
               <p className="text-xs text-[#554336]/80">{t.statEmi}</p>
             </div>
             <div>
-              <p className="text-xl md:text-2xl font-bold text-secondary-green">5000+</p>
+              <p className="text-xl md:text-2xl font-bold text-secondary-green">40+</p>
               <p className="text-xs text-[#554336]/80">{t.statClients}</p>
             </div>
           </motion.div>

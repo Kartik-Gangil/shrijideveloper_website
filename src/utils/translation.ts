@@ -59,7 +59,6 @@ export interface TranslationDict {
     heading: string;
     pDesc: string;
     requestCab: string;
-    teaserAyodhya: string;
     teaserLucknow: string;
     dimensions: string;
     pricing: string;
@@ -90,15 +89,10 @@ export interface TranslationDict {
     securePrice: string;
     selectPlotPrompt: string;
     selectPlotDesc: string;
-    ayodhyaTitle: string;
     lucknowTitle: string;
-    ayodhyaPricing: string;
     lucknowPricing: string;
-    specRoadsAyodhya: string;
     specRoadsLucknow: string;
-    amenitiesListAyodhya: string[];
     amenitiesListLucknow: string[];
-    landmarksAyodhya: string[];
     landmarksLucknow: string[];
   };
   journey: {
@@ -119,7 +113,6 @@ export interface TranslationDict {
     testimonials: {
       text: string;
       author: string;
-      role: string;
     }[];
     cabVisits: string;
     cabVisitsDesc: string;
@@ -134,7 +127,6 @@ export interface TranslationDict {
     placeholderPhone: string;
     labelProject: string;
     placeholderProject: string;
-    projectOpt1: string;
     projectOpt2: string;
     projectOpt3: string;
     errName: string;
@@ -180,8 +172,6 @@ export interface TranslationDict {
     typing: string;
     placeholder: string;
     welcomeMsg: string;
-    resRates: string;
-    resLocations: string;
     resEmi: string;
     resRegistry: string;
     resWelcome: string;
@@ -210,8 +200,8 @@ export const translations: Record<Language, TranslationDict> = {
       interestFree: "0% Interest EMI",
       happyClients: "5000+ Happy Clients",
       statRegistry: "Legal Registry",
-      statEmi: "Interest EMI",
-      statClients: "Happy Clients",
+      statEmi: "Gated Security",
+      statClients: "Ft road",
     },
     trust: {
       badge: "Developer Credentials",
@@ -226,7 +216,7 @@ export const translations: Record<Language, TranslationDict> = {
         },
         {
           title: "Easy EMI",
-          desc: "Flexible 12 to 36 months 100% interest-free payment plans available directly from developers.",
+          desc: "Flexible 12 to 36 months plans available directly from developers.",
         },
         {
           title: "Prime Location",
@@ -262,10 +252,8 @@ export const translations: Record<Language, TranslationDict> = {
       heading: "Our Featured Townships",
       pDesc: "Meticulously planned layouts designed for a modern lifestyle while preserving traditional community values. Fully compliant and possession-ready.",
       requestCab: "Request Site Consultation",
-      ayodhyaTitle: "Ayodhya Heritage Greens",
-      lucknowTitle: "Lucknow Smart Enclave",
-      teaserAyodhya: "Near Ram Mandir Corridor | 1000 - 3500 Sq.Ft. Premium development with themed gardens and 24/7 security.",
-      teaserLucknow: "Shaheed Path | 1200 - 2500 Sq.Ft. A modern oasis featuring smart infrastructure and family-focused amenities.",
+      lucknowTitle: "ShriJI Enclave",
+      teaserLucknow: "Hingona Khurd Near Toll Plaza, Morena | 1000 - 2500 Sq.Ft. A modern oasis featuring smart infrastructure and family-focused amenities.",
       dimensions: "Plot Dimensions",
       pricing: "Value Range",
       detailsBtn: "Details",
@@ -273,9 +261,7 @@ export const translations: Record<Language, TranslationDict> = {
       specsBadge: "Verified Specifications",
       roadWidth: "Main Road Width",
       priceIndex: "Price Indexation",
-      ayodhyaPricing: "Starting from ₹1,800 / Sq.Ft.",
       lucknowPricing: "Starting from ₹2,200 / Sq.Ft.",
-      specRoadsAyodhya: "40 Feet Main road, 30 Feet Link roads",
       specRoadsLucknow: "45 Feet Decorative Main Gate Road",
       amenitiesTitle: "Modern Amenities Included",
       landmarksTitle: "Proximity & Key Distances",
@@ -299,10 +285,8 @@ export const translations: Record<Language, TranslationDict> = {
       securePrice: "Secure price block layout instantly",
       selectPlotPrompt: "Select an active Plot",
       selectPlotDesc: "Tap any plot on the layout grid to inspect detailed possession info.",
-      amenitiesListAyodhya: ["Gated Compound with Boundary", "Themed Vedic Gardens", "30ft & 40ft Tar Roads", "Dedicated Water Reservoir", "Underground Electricity Pipes"],
       amenitiesListLucknow: ["Kid's Playground Park", "Solar Powered Streetlights", "Grand Entrance Archway", "Rainwater Harvesting Pit", "24/7 Security CCTV surveillance"],
-      landmarksAyodhya: ["Ram Mandir Entrance: 10 Mins", "National Highway 27: 3 Mins", "International Airport: 15 Mins"],
-      landmarksLucknow: ["Shaheed Path Junction: 2 Mins", "Medanta Super Speciality: 8 Mins", "Phoenix Palassio Mall: 7 Mins"],
+      landmarksLucknow: ["Hingona Khurd", "Toll Plaza, Morena"],
     },
     journey: {
       badge: "Seamless Legal Process",
@@ -340,17 +324,14 @@ export const translations: Record<Language, TranslationDict> = {
         {
           text: "Investing with Shriji Developers was the best decision for my children's future. The process was transparent, all land papers were government verified, and the staff guided us at every sub-registrar office registration step.",
           author: "Rajesh Kumar",
-          role: "Govt. Officer, Owner at Heritage Greens Plot #108"
         },
         {
           text: "I was extremely worried about Registry fraud in Uttar Pradesh. ShriJi Developers provided the complete Registry documents and Dakhil Kharij papers online prior to booking. Truly transparent and professional developers.",
-          author: "Sanjay Mishra",
-          role: "Retired Professor, Owner at Lucknow Smart Enclave"
+          author: "Sanjay Mishra"
         },
         {
           text: "Very comfortable payment terms. The interest-free installment options helped me purchase active commercial plots on Shaheed Path without taking banking loans. Recommended family developers!",
-          author: "Preeti Sharma",
-          role: "Business Owner, Owner at Lucknow Smart Enclave"
+          author: "Preeti Sharma"
         }
       ],
       cabVisits: "Cab Visits",
@@ -366,7 +347,6 @@ export const translations: Record<Language, TranslationDict> = {
       placeholderPhone: "Enter 10-digit mobile number",
       labelProject: "Preferred Project Block",
       placeholderProject: "Select a Project",
-      projectOpt1: "Ayodhya Heritage Greens (Near Ram Mandir Corridor)",
       projectOpt2: "Lucknow Smart Enclave (Shaheed Path)",
       projectOpt3: "General Commercial Layouts",
       errName: "Please enter your full name.",
@@ -412,8 +392,6 @@ export const translations: Record<Language, TranslationDict> = {
       typing: "Desk Officer typing...",
       placeholder: "Ask a plot specialist...",
       welcomeMsg: "नमस्ते! Welcome to ShriJi Developers Online Assist Desk. How can I guide you on your plot ownership journey today?",
-      resRates: "Plots start at ₹1,800/Sq.Ft. in Ayodhya Heritage Greens, and ₹2,200/Sq.Ft. in Lucknow Smart Enclave. We offer interest-free EMIs up to 36 months directly with standard bookings!",
-      resLocations: "Our featured townships are located strategically inside: \n1. Near Ram Mandir Corridor Corridor (Ayodhya)\n2. Shaheed Path Extension (Lucknow) near landmarks. Cab pickup visits are free!",
       resEmi: "Yes! We run direct flexible interest-free developer financing from 12 to 36 months duration with zero bank clearance hassle and minimum booking advance.",
       resRegistry: "Both townships are 100% RERA Registered and Government Approved. Copy of legal titles, Khatauni Dakhil Kharij certificates are provided directly prior to registry.",
       resWelcome: "Hello! Namaste. I can guide you regarding current plot pricing, layout sizes, RERA certificates, or direct EMI structures. What are you looking to buy today?",
@@ -440,8 +418,8 @@ export const translations: Record<Language, TranslationDict> = {
       interestFree: "0% ब्याज ईएमआई",
       happyClients: "5000+ खुश ग्राहक",
       statRegistry: "रजिस्ट्री सुरक्षा",
-      statEmi: "ब्याज मुक्त किस्त",
-      statClients: "संतुष्ट परिवार",
+      statEmi: "गेटेड सुरक्षा",
+      statClients: "फीट रोड",
     },
     trust: {
       badge: "डेवलपर साख विवरण",
@@ -492,10 +470,8 @@ export const translations: Record<Language, TranslationDict> = {
       heading: "हमारी मुख्य टाउनशिप",
       pDesc: "पारंपरिक पारिवारिक मूल्यों और सुरक्षा को संजोए हुए आधुनिक जीवन शैली की जरूरतों के अनुसार योजनाबद्ध रूप से तैयार लेआउट। कब्जे के साथ तत्काल उपलब्ध।",
       requestCab: "निःशुल्क साइट विजिट गाड़ी बुक करें",
-      ayodhyaTitle: "अयोध्या हेरिटेज ग्रीन्स",
-      lucknowTitle: "लखनऊ स्मार्ट एन्क्लेव",
-      teaserAyodhya: "राम मंदिर कॉरिडोर के निकट | 1000 - 3500 वर्ग फीट। सुंदर वैदिक वाटिका और 24 घंटे सुरक्षा के साथ उत्तम आवासीय टाउनशिप।",
-      teaserLucknow: "शहीद पथ विस्तार | 1200 - 2500 वर्ग फीट। आधुनिक स्मार्ट इन्फ्रास्ट्रक्चर और परिवार अनुकूल पार्क से सुसज्जित स्वर्ग।",
+      lucknowTitle: "श्रीजी एन्क्लेव",
+      teaserLucknow: "हिंगोना खुर्द टोल प्लाजा के पास, मुरैना | 1000 - 2500 वर्ग फीट। आधुनिक स्मार्ट इन्फ्रास्ट्रक्चर और परिवार अनुकूल पार्क से सुसज्जित स्वर्ग।",
       dimensions: "प्लॉट आकार",
       pricing: "मूल्य का दायरा",
       detailsBtn: "विस्तृत विवरण",
@@ -503,9 +479,7 @@ export const translations: Record<Language, TranslationDict> = {
       specsBadge: "सत्यापित तकनीकी विनिर्देश",
       roadWidth: "मुख्य मार्ग की चौड़ाई",
       priceIndex: "मूल्य मानक",
-      ayodhyaPricing: "₹1,800 / वर्ग फीट से शुरू",
       lucknowPricing: "₹2,200 / वर्ग फीट से शुरू",
-      specRoadsAyodhya: "40 फीट मुख्य चौड़ा रास्ता, 30 फीट आंतरिक संपर्क सड़कें",
       specRoadsLucknow: "45 फीट भव्य द्वार चौड़ा रास्ता, 30 फीट आंतरिक सड़कें",
       amenitiesTitle: "शामिल आधुनिक नागरिक सुविधाएं",
       landmarksTitle: "नजदीकी दूरी और संपर्क मार्ग",
@@ -529,10 +503,8 @@ export const translations: Record<Language, TranslationDict> = {
       securePrice: "अपनी पसंद का प्लॉट तुरंत आरक्षित करें",
       selectPlotPrompt: "एक सक्रिय प्लॉट को चुनें",
       selectPlotDesc: "आबंटन स्थिति और क्षेत्रफल देखने के लिए लेआउट मानचित्र में किसी भी प्लॉट पर क्लिक करें।",
-      amenitiesListAyodhya: ["चहारदीवारी युक्त सुरक्षित गेटेड टाउनशिप", "थीम आधारित वैदिक पार्क और वाटिका", "30 और 40 फीट चौड़ी डामर सड़कें", "स्वतंत्र जल संग्रहण जलाशय टंकी", "भूमिगत विद्युत प्रदाय केबल लाइन"],
       amenitiesListLucknow: ["बच्चों के खेलने हेतु खुला बहुउपयोगी पार्क", "सौर ऊर्जा संचालित ऑटो स्ट्रीट लाइट्स", "भव्य स्वागत प्रवेश द्वार मार्ग", "वर्षा जल संचयन हेतु सोख्ता गड्ढा", "24 घंटे सीसीटीवी और सुरक्षा गार्ड"],
-      landmarksAyodhya: ["राम मंदिर परिसर द्वार: 10 मिनट", "राष्ट्रीय राजमार्ग 27: 3 मिनट", "अयोध्या अंतर्राष्ट्रीय हवाई अड्डा: 15 मिनट"],
-      landmarksLucknow: ["शहीद पथ मुख्य चौराहा: 2 मिनट", "मेदांता अस्पताल: 8 मिनट", "फ़ीनिक्स पलासियो मॉल: 7 मिनट"],
+      landmarksLucknow: ["हिंगोना खुर्द ", "टोल प्लाजा , मुरैना"],
     },
     journey: {
       badge: "सरल व कानूनी प्रक्रिया",
@@ -569,18 +541,15 @@ export const translations: Record<Language, TranslationDict> = {
       testimonials: [
         {
           text: "श्रीजी डेवलपर्स के साथ निवेश करना मेरे बच्चों के उज्जवल भविष्य के लिए लिया गया सर्वश्रेष्ठ निर्णय था। सारी प्रक्रिया शीशे की तरह साफ थी, सरकारी दस्तावेज पूर्ण थे और कर्मचारियों ने रजिस्ट्री कार्यालय में खुद साथ रहकर काम कराया।",
-          author: "राजेश कुमार",
-          role: "शासकीय अधिकारी, हेरिटेज ग्रीन्स प्लॉट #108 के स्वामी"
+          author: "राजेश कुमार"
         },
         {
           text: "मुझे पहले जमीन खरीद और धोखाधड़ी का बहुत डर था। पर श्रीजी की टीम ने बुकिंग से पूर्व ही सारे सत्यापित स्वामित्व दस्तावेज़ और खतौनी हमें ऑनलाइन उपलब्ध करा दी। बेहद ईमानदार और पेशेवर लोग हैं।",
-          author: "संजय मिश्रा",
-          role: "सेवानिवृत्त प्रोफेसर, लखनऊ स्मार्ट एन्क्लेव के स्वामी"
+          author: "संजय मिश्रा"
         },
         {
           text: "बहुत ही आरामदायक भुगतान विकल्प हैं। बिना बैंक लोन के ब्याज-मुक्त किस्तों की अनूठी योजना ने मुझे शहीद पथ पर व्यावसायिक उपयोग के लिए प्लॉट खरीदने में बड़ी मदद दी। उत्तर प्रदेश के सबसे भरोसेमंद डेवलपर!",
-          author: "प्रीति शर्मा",
-          role: "महिला उद्यमी, लखनऊ स्मार्ट एन्क्लेव की स्वामी"
+          author: "प्रीति शर्मा"
         }
       ],
       cabVisits: "साइट विजिट सेवा",
@@ -596,7 +565,6 @@ export const translations: Record<Language, TranslationDict> = {
       placeholderPhone: "10- अंकों का मोबाइल नंबर प्रविष्ट करें",
       labelProject: "आपकी पसंदीदा टाउनशिप योजना",
       placeholderProject: "एक टाउनशिप योजना चुनें",
-      projectOpt1: "अयोध्या हेरिटेज ग्रीन्स (राम मंदिर मुख्य कॉरिडोर के निकट)",
       projectOpt2: "लखनऊ स्मार्ट एन्क्लेव (शहीद पथ विस्तार)",
       projectOpt3: "सामान्य व्यावसायिक व हाईवे प्लॉट योजनाएं",
       errName: "कृपया अपना पूरा नाम दर्ज करें।",
@@ -642,8 +610,6 @@ export const translations: Record<Language, TranslationDict> = {
       typing: "सपोर्ट अधिकारी टाइप कर रहे हैं...",
       placeholder: "अपने सवाल पूछें...",
       welcomeMsg: "नमस्ते! श्रीजी डेवलपर्स ऑनलाइन पूछताछ सहायता पटल पर आपका स्वागत है। आज मैं आपको प्लॉट चयन या किस्त योजना के बारे में क्या जानकारी प्रदान करूँ?",
-      resRates: "प्लॉट के रेट अयोध्या हेरिटेज ग्रीन्स में ₹1,800/वर्ग फीट और लखनऊ स्मार्ट एन्क्लेव में ₹2,200/वर्ग फीट से शुरू हैं। बिना किसी बैंक लोन के आपको 36 महीने की ब्याज-मुक्त आसान किस्तें मिल सकती हैं!",
-      resLocations: "हमारी योजनाएं इन स्थानों पर हैं:\n1. राम मंदिर कॉरिडोर के पास (अयोध्या)\n2. शहीद पथ विस्तार (लखनऊ)\nहमारी गाड़ियों द्वारा सपरिवार साइट विजिट बिल्कुल मुफ्त है!",
       resEmi: "जी हाँ! हम सीधे श्रीजी डेवलपर्स के माध्यम से बिना किसी बैंक चक्कर के 12 से 36 महीने की न्यूनतम अग्रिम बुकिंग राशि पर ब्याज-मुक्त किस्तें प्रदान करते हैं।",
       resRegistry: "दोनों टाउनशिप 100% रेरा और यूपी सरकार से मान्यता प्राप्त हैं। बुकिंग के पूर्व आपको सभी कानूनी दस्तावेज, खतौनी और रजिस्ट्री की प्रति आपके अवलोकन हेतु मिलेगी।",
       resWelcome: "नमस्ते। मैं आपको हमारे प्लॉट की कीमतों, उपलब्ध आकार, रेरा पंजीकरण सरकारी दस्तावेजों और किस्त संरचना के बारे में पूरी जानकारी दे सकता हूँ। आप किस स्थान हेतु प्लॉट देख रहे हैं?",

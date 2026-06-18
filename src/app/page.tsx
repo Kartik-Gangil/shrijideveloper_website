@@ -19,6 +19,8 @@ interface Submissions {
   ticketId: string;
 }
 
+const message = "Hello, I’m looking to inquire about your available plots. Please share a brochure or have a representative call me back at your earliest convenience."
+
 export default function App() {
   const [language, setLanguage] = useState<Language>("hi");
   const [activeSection, setActiveSection] = useState("hero");
@@ -112,23 +114,18 @@ export default function App() {
       =======================================================
                SHRIJI DEVELOPER - OFFICIAL PROPERTY PORTFOLIO
       =======================================================
-      RERA REGISTRATION NUMBER: REG-UP-5523910
       DATE OF PUBLISHING: JUNE 2026
 
       PROJECT HIGHLIGHTS:
-      1. AYODHYA HERITAGE GREENS (Near Ram Mandir Corridor)
-         - Plot sizes: 1000 to 3500 Sq.Ft.
-         - Vedic theme parks, clear compound boundary walling.
-         - 40 feet wide decorative main tar roads.
 
-      2. LUCKNOW SMART ENCLAVE (Shaheed Path Extension)
-         - Plot sizes: 1200 to 2500 Sq.Ft.
+      1. ShriJI ENCLAVE (Hingona Khurd , Morena)
+         - Plot sizes: 1000+ Sq.Ft.
          - High-tech solar grid street lighting and direct drainage.
          - 2 min connectivity access to active Shaheed Path.
 
       REGISTRY POLICIES:
          - Immediate 100% Registry & Dakhil Kharij guaranteed.
-         - Interest-free EMI structures for up to 36 Months.
+         - EMI structures for up to 36 Months.
 
       THANK YOU FOR DOWNLOADING!
       We look forward to hosting your physical site visit.
@@ -137,19 +134,12 @@ export default function App() {
       =======================================================
                श्रीजी डेवलपर - आधिकारिक संपत्ति पोर्टफोलियो
       =======================================================
-      रेरा पंजीकरण संख्या: REG-UP-5523910
       प्रकाशन तिथि: जून 2026
 
       परियोजना की मुख्य विशेषताएं:
-      1. अयोध्या हेरिटेज ग्रीन्स (राम मंदिर मुख्य कॉरिडोर के पास)
-         - प्लॉट आकार: 1000 से 3500 वर्ग फीट।
-         - वैदिक थीम वाटिका, पक्की चहारदीवारी।
-         - 40 फीट चौड़ी डामर मुख्य सड़कें।
-
-      2. लखनऊ स्मार्ट एन्क्लेव (शहीद पथ विस्तार)
-         - प्लॉट आकार: 1200 से 2500 वर्ग फीट।
+     1. श्रीजी एन्क्लेव (हिंगोना खुर्द टोल प्लाजा के पास, मुरैना)
+         - प्लॉट आकार: 1000+ वर्ग फीट।
          - उन्नत सोलर ग्रिड स्ट्रीट लाइट और सुदृढ़ ड्रेनेज।
-         - शहीद पथ मुख्य मार्ग से केवल 2 मिनट की दूरी।
 
       पंजीकरण नियमावली:
          - तत्काल 100% रजिस्ट्री और दाखिल-खारिज की गारंटी।
@@ -171,52 +161,52 @@ export default function App() {
   };
 
   // WhatsApp chat simulation engine response trees
-  const handleSendMessage = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (!chatInput.trim()) return;
+  // const handleSendMessage = (e?: React.FormEvent) => {
+  //   if (e) e.preventDefault();
+  //   if (!chatInput.trim()) return;
 
-    const userMessage = chatInput.trim();
-    const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    setChatMessages((prev) => [
-      ...prev,
-      { sender: "client", text: userMessage, time: timeString }
-    ]);
-    setChatInput("");
-    setIsTyping(true);
+  //   const userMessage = chatInput.trim();
+  //   const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  //   setChatMessages((prev) => [
+  //     ...prev,
+  //     { sender: "client", text: userMessage, time: timeString }
+  //   ]);
+  //   setChatInput("");
+  //   setIsTyping(true);
 
-    // Match keywords to respond intelligently (bilingual support)
-    setTimeout(() => {
-      let botResponse = language === "en"
-        ? "Our specialist will connect shortly. For immediate details, please use our callback request form or call 1800-000-0000."
-        : "हमारे विशेषज्ञ शीघ्र ही आपसे संपर्क करेंगे। तत्काल विवरण के लिए, कृपया हमारे कॉल बैक फॉर्म का उपयोग करें या 1800-000-0000 पर कॉल करें।";
+  //   // Match keywords to respond intelligently (bilingual support)
+  //   setTimeout(() => {
+  //     let botResponse = language === "en"
+  //       ? "Our specialist will connect shortly. For immediate details, please use our callback request form or call 1800-000-0000."
+  //       : "हमारे विशेषज्ञ शीघ्र ही आपसे संपर्क करेंगे। तत्काल विवरण के लिए, कृपया हमारे कॉल बैक फॉर्म का उपयोग करें या 1800-000-0000 पर कॉल करें।";
         
-      const cleanMsg = userMessage.toLowerCase();
+  //     const cleanMsg = userMessage.toLowerCase();
 
-      const hasPrice = cleanMsg.includes("price") || cleanMsg.includes("rate") || cleanMsg.includes("budget") || cleanMsg.includes("cost") || cleanMsg.includes("रेट") || cleanMsg.includes("दाम") || cleanMsg.includes("बजट") || cleanMsg.includes("कीमत") || cleanMsg.includes("पैसा");
-      const hasLocation = cleanMsg.includes("location") || cleanMsg.includes("where") || cleanMsg.includes("address") || cleanMsg.includes("site") || cleanMsg.includes("कहाँ") || cleanMsg.includes("एड्रेस") || cleanMsg.includes("लोकेशन") || cleanMsg.includes("जगह");
-      const hasEmi = cleanMsg.includes("emi") || cleanMsg.includes("installment") || cleanMsg.includes("pay") || cleanMsg.includes("किस्त") || cleanMsg.includes("ईएमआई") || cleanMsg.includes("भुगतान");
-      const hasRegistry = cleanMsg.includes("registry") || cleanMsg.includes("legal") || cleanMsg.includes("rera") || cleanMsg.includes("रजिस्ट्री") || cleanMsg.includes("रेरा") || cleanMsg.includes("कागज");
-      const hasHello = cleanMsg.includes("hello") || cleanMsg.includes("hi") || cleanMsg.includes("namaste") || cleanMsg.includes("नमस्ते") || cleanMsg.includes("राम राम") || cleanMsg.includes("हेलो");
+  //     const hasPrice = cleanMsg.includes("price") || cleanMsg.includes("rate") || cleanMsg.includes("budget") || cleanMsg.includes("cost") || cleanMsg.includes("रेट") || cleanMsg.includes("दाम") || cleanMsg.includes("बजट") || cleanMsg.includes("कीमत") || cleanMsg.includes("पैसा");
+  //     const hasLocation = cleanMsg.includes("location") || cleanMsg.includes("where") || cleanMsg.includes("address") || cleanMsg.includes("site") || cleanMsg.includes("कहाँ") || cleanMsg.includes("एड्रेस") || cleanMsg.includes("लोकेशन") || cleanMsg.includes("जगह");
+  //     const hasEmi = cleanMsg.includes("emi") || cleanMsg.includes("installment") || cleanMsg.includes("pay") || cleanMsg.includes("किस्त") || cleanMsg.includes("ईएमआई") || cleanMsg.includes("भुगतान");
+  //     const hasRegistry = cleanMsg.includes("registry") || cleanMsg.includes("legal") || cleanMsg.includes("rera") || cleanMsg.includes("रजिस्ट्री") || cleanMsg.includes("रेरा") || cleanMsg.includes("कागज");
+  //     const hasHello = cleanMsg.includes("hello") || cleanMsg.includes("hi") || cleanMsg.includes("namaste") || cleanMsg.includes("नमस्ते") || cleanMsg.includes("राम राम") || cleanMsg.includes("हेलो");
 
-      if (hasPrice) {
-        botResponse = t.whatsapp.resRates;
-      } else if (hasLocation) {
-        botResponse = t.whatsapp.resLocations;
-      } else if (hasEmi) {
-        botResponse = t.whatsapp.resEmi;
-      } else if (hasRegistry) {
-        botResponse = t.whatsapp.resRegistry;
-      } else if (hasHello) {
-        botResponse = t.whatsapp.resWelcome;
-      }
+  //     if (hasPrice) {
+  //       botResponse = t.whatsapp.resRates;
+  //     } else if (hasLocation) {
+  //       botResponse = t.whatsapp.resLocations;
+  //     } else if (hasEmi) {
+  //       botResponse = t.whatsapp.resEmi;
+  //     } else if (hasRegistry) {
+  //       botResponse = t.whatsapp.resRegistry;
+  //     } else if (hasHello) {
+  //       botResponse = t.whatsapp.resWelcome;
+  //     }
 
-      setChatMessages((prev) => [
-        ...prev,
-        { sender: "agent", text: botResponse, time: timeString }
-      ]);
-      setIsTyping(false);
-    }, 1000);
-  };
+  //     setChatMessages((prev) => [
+  //       ...prev,
+  //       { sender: "agent", text: botResponse, time: timeString }
+  //     ]);
+  //     setIsTyping(false);
+  //   }, 1000);
+  // };
 
   // WhatsApp quick trigger prompt links
   const selectQuickQuestion = (question: string) => {
@@ -428,7 +418,7 @@ export default function App() {
       <div className="fixed bottom-8 right-8 z-[100] font-noto-sans flex flex-col items-end gap-3 pointer-events-none">
         
         {/* Chat Drawer Widget Panel */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {chatOpen && (
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -436,7 +426,7 @@ export default function App() {
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
               className="bg-white rounded-[32px] w-[330px] sm:w-[370px] shadow-2xl border border-secondary-green/25 overflow-hidden flex flex-col h-[460px] pointer-events-auto"
             >
-              {/* Support Desk Head */}
+             
               <div className="bg-secondary-green p-4 flex justify-between items-center text-white">
                 <div className="flex items-center gap-2.5">
                   <div className="relative">
@@ -462,7 +452,7 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Message Streams */}
+            
               <div className="flex-1 p-4 overflow-y-auto bg-[#faf7f2] space-y-3 scrollbar-none flex flex-col">
                 {chatMessages.map((msg, idx) => {
                   const isAgent = msg.sender === "agent";
@@ -490,7 +480,7 @@ export default function App() {
                 )}
               </div>
 
-              {/* Recommended Quick Action Prompts */}
+             
               <div className="px-3 py-2 bg-white flex gap-1.5 flex-wrap overflow-x-auto border-t border-[#dbc2b0]/20 scrollbar-none">
                 {quickChips.map((q, i) => (
                   <button
@@ -503,7 +493,7 @@ export default function App() {
                 ))}
               </div>
 
-              {/* Chat Send Input Box */}
+             
               <form onSubmit={handleSendMessage} className="p-3 bg-white border-t border-[#dbc2b0]/20 flex gap-2">
                 <input 
                   id="chat-input-box"
@@ -523,17 +513,18 @@ export default function App() {
               </form>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
 
         {/* The Action green WhatsApp Pill Button itself */}
-        <button 
-          onClick={() => setChatOpen(!chatOpen)}
+        <a 
+          // onClick={() => setChatOpen(!chatOpen)}
+          href={`https://wa.me/916262777411?text=${message}`}
           className="relative flex items-center justify-center w-16 h-16 bg-[#25D366] text-[#ffffff] rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer pointer-events-auto"
           aria-label="Open Assistance Chat"
         >
           <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>
           <MessageCircle className="h-8 w-8 relative z-10 text-white fill-current" />
-        </button>
+        </a>
 
       </div>
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Map, Layers, Compass, Zap, Check, Shield } from "lucide-react";
 import { translations, Language } from "../utils/translation";
+import Image from "next/image";
 
 interface Project {
   id: string;
@@ -16,7 +17,7 @@ interface Project {
   landmarks: string[];
   roadWidth: string;
   pricing: string;
-  layoutPlots: { id: number; size: string; status: "Available" | "Sold" | "Reserved" }[];
+  // layoutPlots: { id: number; size: string; status: "Available" | "Sold" | "Reserved" }[];
 }
 
 interface ProjectsProps {
@@ -39,10 +40,10 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
 
   const projects: Project[] = [
     {
-      id: "lucknow",
+      id: "Morena",
       title: t.lucknowTitle,
-      location: language === "en" ? "Shaheed Path Extension, Lucknow" : "शहीद पथ विस्तार, लखनऊ",
-      size: "1200 - 2500 Sq.Ft.",
+      location: language === "en" ? "Hingona Khurd Near Toll Plaza, Morena" : "हिंगोना खुर्द टोल प्लाजा के पास, मुरैना",
+      size: "800 - 2500 Sq.Ft.",
       badge: language === "en" ? "Fast Selling" : "तेजी से बिक्री",
       badgeType: "selling",
       image: "https://lh3.googleusercontent.com/aida-public/AB6AXuChY_mosXuE9Gp5vf959WjqP3QXaMcKhUFlWzzMofQbs4PaDBR3uPyjX5mshKaqcInXfEIQdYrPcX9CRVkk3MkDllKsBjngcxudEMPGtVisEK4w4mfztvvKGduE854UpDAkgMVu4meqxThU5kz-BIA1pNaCrH36AVCTllAE3gyoti2TaH1ATIn5dOBtuIKEs1CPM74r-r8YPd4gzi1hrItvF22ZqJQrP62ktVcIh-J9rQdZbaGuEEIZwmq7TkGrEFDBjGl5vT0V7Q0",
@@ -50,18 +51,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
       amenities: t.amenitiesListLucknow,
       landmarks: t.landmarksLucknow,
       roadWidth: t.specRoadsLucknow,
-      pricing: t.lucknowPricing,
-      layoutPlots: [
-        { id: 201, size: "1200 Sq.Ft.", status: "Sold" },
-        { id: 202, size: "1200 Sq.Ft.", status: "Sold" },
-        { id: 203, size: "1500 Sq.Ft.", status: "Available" },
-        { id: 204, size: "1500 Sq.Ft.", status: "Available" },
-        { id: 205, size: "1800 Sq.Ft.", status: "Sold" },
-        { id: 206, size: "1800 Sq.Ft.", status: "Available" },
-        { id: 207, size: "2000 Sq.Ft.", status: "Reserved" },
-        { id: 208, size: "2200 Sq.Ft.", status: "Available" },
-        { id: 209, size: "2500 Sq.Ft.", status: "Available" },
-      ]
+      pricing: t.lucknowPricing
     }
   ];
 
@@ -74,7 +64,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
   return (
     <section id="projects" className="py-24 bg-white overflow-hidden text-[#1a1c1c]">
       <div className="max-w-7xl mx-auto px-4 md:px-16">
-        
+
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6">
           <div className="max-w-xl text-left">
@@ -88,7 +78,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
               {t.pDesc}
             </p>
           </div>
-          <button 
+          <button
             onClick={() => handleInquireNow("General Inquiry")}
             className="bg-secondary-green/5 text-secondary-green px-6 py-3 rounded-full font-bold border border-secondary-green/20 hover:bg-secondary-green hover:text-white transition-all text-xs cursor-pointer active:scale-95"
           >
@@ -101,16 +91,16 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
           {projects.map((project, idx) => {
             const isEven = idx % 2 === 0;
             return (
-              <div 
-                key={project.id} 
+              <div
+                key={project.id}
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center`}
               >
                 {/* Image Section */}
                 <div className={`lg:col-span-7 relative ${isEven ? "lg:order-1" : "lg:order-2"}`}>
                   <div className={`absolute -top-6 ${isEven ? "-left-6" : "-right-6"} w-32 h-32 bg-primary-orange/5 asymmetric-blob -z-10`}></div>
-                  <img 
-                    alt={project.title} 
-                    className="w-full aspect-16/10 object-cover organic-radius shadow-xl hover:scale-[1.01] transition-transform duration-500" 
+                  <img
+                    alt={project.title}
+                    className="w-full aspect-16/10 object-cover organic-radius shadow-xl hover:scale-[1.01] transition-transform duration-500"
                     src={project.image}
                     referrerPolicy="no-referrer"
                   />
@@ -119,12 +109,11 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                 {/* Info Card Section */}
                 <div className={`lg:col-span-5 z-10 ${isEven ? "lg:order-2 lg:-ml-12" : "lg:order-1 lg:-mr-12"}`}>
                   <div className="bg-white p-6 md:p-10 organic-radius shadow-lg border border-[#dbc2b0]/30">
-                    <span 
-                      className={`inline-block text-[11px] uppercase tracking-wider font-bold px-3 py-1 rounded-full mb-4 ${
-                        project.badgeType === "available" 
-                          ? "bg-secondary-green text-white" 
-                          : "bg-primary-orange text-white"
-                      }`}
+                    <span
+                      className={`inline-block text-[11px] uppercase tracking-wider font-bold px-3 py-1 rounded-full mb-4 ${project.badgeType === "available"
+                        ? "bg-secondary-green text-white"
+                        : "bg-primary-orange text-white"
+                        }`}
                     >
                       {project.badge}
                     </span>
@@ -134,7 +123,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                     <p className="font-noto-sans text-[#554336] text-xs md:text-sm mb-6 leading-relaxed text-left">
                       {project.teaser}
                     </p>
-                    
+
                     {/* Size and Pricing Details */}
                     <div className="grid grid-cols-2 gap-4 py-4 border-t border-b border-[#dbc2b0]/20 mb-6 font-noto-sans text-xs">
                       <div className="text-left">
@@ -149,16 +138,16 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
 
                     {/* Interactive Actions Grid */}
                     <div className="flex gap-4">
-                      <button 
+                      <button
                         onClick={() => setSelectedProject(project)}
                         className="bg-primary-orange text-white px-6 py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md shadow-primary-orange/20 cursor-pointer hover:bg-primary-orange/95 hover:shadow-lg active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5"
                       >
                         <Layers className="h-4 w-4" />
                         <span>{t.detailsBtn}</span>
                       </button>
-                      <button 
+                      <button
                         onClick={() => {
-                          setShowMapProject(project); 
+                          setShowMapProject(project);
                           setSelectedPlot(null);
                         }}
                         className="border border-secondary-green text-secondary-green px-6 py-3.5 rounded-full font-bold text-xs md:text-sm hover:bg-secondary-green/5 cursor-pointer active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5"
@@ -180,7 +169,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
           {selectedProject && (
             <div className="fixed inset-0 z-55 flex items-center justify-center p-4">
               {/* Blur backdrop overlay */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -189,14 +178,15 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
               />
 
               {/* Specification Card */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                className="relative bg-[#fdfbf7] rounded-[36px] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl border border-[#dbc2b0]/50 z-10"
+                className="relative bg-[#fdfbf7] rounded-[36px] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl border border-[#dbc2b0]/50 z-10 [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]"
               >
                 {/* Close Button */}
-                <button 
+                <button
+                  title="close"
                   onClick={() => setSelectedProject(null)}
                   className="absolute top-5 right-5 p-2 rounded-full hover:bg-secondary-green/10 text-[#554336] transition-colors cursor-pointer"
                 >
@@ -216,7 +206,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
 
                 {/* Specs Details */}
                 <div className="space-y-6 font-noto-sans text-sm">
-                  
+
                   {/* Road details & price */}
                   <div className="bg-white p-4.5 rounded-2xl border border-[#dbc2b0]/30 space-y-1.5">
                     <div className="text-[11px] font-bold text-[#554336]/60 uppercase tracking-widest flex items-center gap-1">
@@ -267,13 +257,15 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
 
                   {/* Actions inside Modal */}
                   <div className="pt-4 flex gap-3">
-                    <button 
+                    <button
+                      title="inquire"
                       onClick={() => handleInquireNow(selectedProject.title)}
                       className="flex-1 bg-secondary-green text-white py-3.5 rounded-xl font-bold text-xs hover:bg-[#035300] shadow-sm transition-all text-center cursor-pointer"
                     >
                       Inquire About {selectedProject.title}
                     </button>
-                    <button 
+                    <button
+                      title="map"
                       onClick={() => {
                         setSelectedProject(null);
                         setShowMapProject(selectedProject);
@@ -293,9 +285,9 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
         {/* Modal: Interactive Township Plot Selection map Layout */}
         <AnimatePresence>
           {showMapProject && (
-            <div className="fixed inset-0 z-55 flex items-center justify-center p-4">
+            <div className="fixed inset-0 z-55 flex items-center justify-center p-4 ">
               {/* Backdrop */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -304,14 +296,15 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
               />
 
               {/* Spec Layout Sheet */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                className="relative bg-[#fdfbf7] rounded-[36px] max-w-3xl w-full p-6 md:p-8 shadow-2xl border border-[#dbc2b0]/50 z-10 max-h-[92vh] overflow-y-auto"
+                className="relative bg-[#fdfbf7] rounded-[36px] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl border border-[#dbc2b0]/50 z-10 [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]"
               >
                 {/* Close */}
-                <button 
+                <button
+                  title="close"
                   onClick={() => setShowMapProject(null)}
                   className="absolute top-5 right-5 p-2 rounded-full hover:bg-secondary-green/10 text-[#554336] transition-colors cursor-pointer"
                 >
@@ -332,18 +325,25 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                 </div>
 
                 {/* Layout and Interaction Panel Info */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start font-noto-sans text-xs">
-                  
+                <div className="items-start font-noto-sans text-xs">
+
                   {/* Left: The simulated Plot grid */}
-                  <div className="lg:col-span-8 space-y-4">
+                  <div className="">
                     <div className="bg-white p-5 rounded-3xl border border-[#dbc2b0]/40 shadow-inner">
                       {/* Grid representation */}
                       <div className="flex justify-between items-center text-[10px] text-[#554336]/60 border-b border-[#dbc2b0]/20 pb-3 mb-4 font-bold tracking-wider">
                         <span>🚧 MAIN ENTRANCE GATE & SECURITY COMPOUND (40FT ROAD)</span>
                       </div>
-                      
-                      <div className="grid grid-cols-3 gap-3.5">
-                        {showMapProject.layoutPlots.map((plot) => {
+
+                      <div>
+                        <Image
+                          src={"https://res.cloudinary.com/drd6gndvh/image/upload/f_auto,q_auto,w_800/v1781807042/copy_of_map_ewtvp3.webp"}
+                          alt="map image"
+                          className="w-full h-full object-cover rounded-2xl"
+                          width={1000}
+                          height={1000}
+                        />
+                        {/* {showMapProject.layoutPlots.map((plot) => {
                           const isSelected = selectedPlot === plot.id;
                           let bgClass = "bg-[#eeeeee]/60 border-[#eeeeee]";
                           let textClass = "text-[#554336]/70";
@@ -370,7 +370,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                               </span>
                             </button>
                           );
-                        })}
+                        })} */}
                       </div>
 
                       <div className="flex justify-between items-center text-[9px] text-[#554336]/60 border-t border-[#dbc2b0]/20 pt-3 mt-4">
@@ -397,7 +397,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                   </div>
 
                   {/* Right: Selected Plot actions panel */}
-                  <div className="lg:col-span-4 bg-white p-5 rounded-3xl border border-[#dbc2b0]/40 flex flex-col justify-between h-full min-h-[220px]">
+                  {/* <div className="lg:col-span-4 bg-white p-5 rounded-3xl border border-[#dbc2b0]/40 flex flex-col justify-between h-full min-h-[220px]">
                     {selectedPlot ? (() => {
                       const plotData = showMapProject.layoutPlots.find(p => p.id === selectedPlot);
                       return (
@@ -451,7 +451,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                         </p>
                       </div>
                     )}
-                  </div>
+                  </div> */}
 
                 </div>
 
