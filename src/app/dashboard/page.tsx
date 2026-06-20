@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Navbar from "../properties/component/Navbar";
 import { fetchLeads } from './action';
+import { isLoggedIn } from "@/utils/auth";
 
 interface Plot {
   _id: string;
@@ -77,8 +78,12 @@ export default function AdminPropertyDashboard() {
       setLoader(false)
     }
   }
+  const router = useRouter();
 
   useEffect(() => {
+    if (!isLoggedIn()) {
+      router.replace('/auth/login');
+    }
     fetchData();
   }, [])
 
@@ -98,7 +103,6 @@ export default function AdminPropertyDashboard() {
     }
   }
 
-  const router = useRouter();
 
   // Filter plots based on name (title), location (address), or status
   const filteredPlots = dataFrame.plot.filter((item) => {
@@ -314,7 +318,7 @@ export default function AdminPropertyDashboard() {
                           </a>
                         </td>
                         <td className="px-6 py-4 text-center">
-                          <a href={`https://wa.me/916262777411?text=Hello! How Can I help you ${lead.name}`} className="inline-block p-2 hover:bg-green-50 rounded-full text-green-600 transition">
+                          <a href={`https://wa.me/91${lead.phone}?text=Hello! How Can I help you ${lead.name}`} className="inline-block p-2 hover:bg-green-50 rounded-full text-green-600 transition">
                             <MessageCircle size={18} />
                           </a>
                         </td>

@@ -3,6 +3,7 @@ export const TOKEN_KEY = 'admin_token';
 export function setToken(token: string) {
     try {
         if (typeof window !== 'undefined') localStorage.setItem(TOKEN_KEY, token);
+        document.cookie = `admin_token=${token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Strict; Secure`;
     } catch (e) {
         console.warn('Failed to set token', e);
     }

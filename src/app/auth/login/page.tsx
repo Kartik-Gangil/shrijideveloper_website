@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { setToken, isLoggedIn } from "@/utils/auth";
 
 export default function LoginPage() {
@@ -11,6 +11,8 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
@@ -25,7 +27,7 @@ export default function LoginPage() {
             const data = await res.json();
             if (res.ok && data.success) {
                 if (data.token) setToken(data.token);
-                router.push("/dashboard");
+                router.push(callbackUrl);
             } else {
                 setError(data.error || "Login failed");
             }
@@ -38,7 +40,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (isLoggedIn()) {
-            router.push('/dashboard');
+            router.replace('/dashboard');
         }
     }, []);
 
