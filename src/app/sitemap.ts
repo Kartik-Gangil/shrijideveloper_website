@@ -1,4 +1,4 @@
-// app/sitemap.ts
+// src/app/sitemap.ts
 import type { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -7,23 +7,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     let propertiesUrls: MetadataRoute.Sitemap = []
 
     try {
-        // Dhyaan dein: Yeh URL aapki backend API ka hona chahiye jo JSON data deti hai
         const res = await fetch(`${baseUrl}/api/properties`, { next: { revalidate: 3600 } })
 
         if (res.ok) {
-            const properties = await res.json()
+            const data = await res.json()
 
-            propertiesUrls = properties.map((post: any) => ({
-                url: `${baseUrl}/properties/${post.slug}`,
-                // Agar updatedAt database mein nahi hai, toh fallback mein naye Date() ka use karein
-                lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(),
-                changeFrequency: 'weekly',
-                priority: 0.7,
-            }))
+            // ERROR FIX: Check karein ki data khud array hai, ya data ke andar koi array hai (jaise data.properties)
+            const propertiesArray = Array.isArray(data) ? data : (Array.isArray(data.properties) ? data.properties : [])
+
+            if (propertiesArray.length > 0) {
+                propertiesUrls = propertiesArray.map((post: any) => {
+                    // MongoDB ki ID ko string mein convert karne ke liye .toString() use karein
+                    const propertyId = post._id ? post._id.toString() : post.id;
+
+                    return {
+                        // FIX: Yahan post.slug ki jagah propertyId use kiya hai
+                        url: `${baseUrl}/properties/${propertyId}`,
+                        lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(),
+                        changeFrequency: 'weekly',
+                        priority: 0.7,
+                    };
+                });
+            } else {
+                console.warn("Warning: API se array nahi mila ya array khaali hai", data)
+            }
         }
     } catch (error) {
         console.error("Sitemap fetch error:", error)
-        // Agar API fail bhi ho jaye, toh website crash nahi hogi, baaki pages ka sitemap ban jayega
     }
 
     return [
@@ -39,6 +49,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'daily',
             priority: 0.8,
         },
-        ...propertiesUrls // Yahan par aapke saare dynamic properties ke links jud jayenge
+        {
+            url: `${baseUrl}/contact`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
+        ...propertiesUrls // Agar API fail bhi ho, toh purane static pages render honge
     ]
 }
