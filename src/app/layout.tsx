@@ -16,24 +16,213 @@ const notoSans = Noto_Sans({
   display: "swap",
 });
 
+
 export const metadata: Metadata = {
-  title: "ShriJi Developers - Nature-Forward Heritage Living",
-  description: "Premium residential plots with modern amenities, 100% legal security, and easy payment plans.",
+  metadataBase: new URL("https://shrijideveloper.in"),
+
+  title: {
+    default:
+      "ShriJi Developers | Premium Residential Plots & Nature-Forward Heritage Living",
+    template: "%s | ShriJi Developers",
+  },
+
+  description:
+    "ShriJi Developers offers premium residential plots with modern infrastructure, clear legal documentation, flexible payment plans, and nature-forward heritage living communities. Invest with confidence in secure and future-ready real estate.",
+
+  keywords: [
+    // Brand
+    "ShriJi Developers",
+
+    // Morena Real Estate
+    "Plots in Morena",
+    "Residential Plots in Morena",
+    "Premium Plots in Morena",
+    "Land for Sale in Morena",
+    "Property in Morena",
+    "Real Estate in Morena",
+    "Township in Morena",
+    "Gated Community in Morena",
+    "Morena Property Dealer",
+    "Morena Real Estate Developer",
+
+    // Investment Keywords
+    "Property Investment in Morena",
+    "Best Property Investment in Morena",
+    "Future Growth Area Morena",
+    "Investment Plots in Morena",
+    "Residential Land Investment",
+    "Secure Property Investment",
+
+    // Township Keywords
+    "Residential Township Morena",
+    "Premium Township Morena",
+    "Integrated Township Morena",
+    "Luxury Township Morena",
+    "Township Project Morena",
+
+    // Plot Keywords
+    "Buy Plot in Morena",
+    "Plot for Sale Morena",
+    "Residential Plot Morena",
+    "Approved Plots Morena",
+    "Legal Plots Morena",
+    "Affordable Plots Morena",
+    "Premium Residential Plots",
+    "Plots with Amenities",
+    "Gated Plot Project",
+
+    // Buyer Intent
+    "Best Plots in Morena",
+    "Top Real Estate Projects Morena",
+    "Best Township in Morena",
+    "Property Near Morena City",
+    "Land Investment Opportunities Morena",
+
+    // Trust Keywords
+    "100 Percent Legal Property",
+    "Verified Land Documents",
+    "Registry Ready Plots",
+    "Government Approved Layout",
+    "Clear Title Property",
+
+    // Lifestyle Keywords
+    "Nature Living Community",
+    "Modern Township Living",
+    "Green Living Morena",
+    "Heritage Living",
+    "Family Friendly Township",
+    "Premium Lifestyle Community",
+
+    // Regional Keywords
+    "Property Near Gwalior",
+    "Plots Near Gwalior",
+    "Township Near Gwalior",
+    "Investment Property Near Gwalior",
+    "Residential Land Near Gwalior"
+  ],
+
+  authors: [
+    {
+      name: "ShriJi Developer",
+    },
+  ],
+
+  creator: "ShriJi Developer",
+  publisher: "ShriJi Developer",
+
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  alternates: {
+    canonical: "https://shrijidevelopers.com",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://shrijidevelopers.com",
+    siteName: "ShriJi Developers",
+
+    title:
+      "ShriJi Developers | Premium Residential Plots & Heritage Living",
+
+    description:
+      "Own premium residential plots with modern amenities, transparent legal documentation, and flexible payment plans.",
+
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ShriJi Developers Residential Projects",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title:
+      "ShriJi Developers | Premium Residential Plots & Heritage Living",
+
+    description:
+      "Explore premium residential plots designed for modern and sustainable living.",
+
+    images: ["/og-image.jpg"],
+  },
+
+  category: "Real Estate",
 };
+
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const realEstateSchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    name: "ShriJi Developers",
+    url: "https://shrijideveloper.in",
+    logo: "https://shrijideveloper.in/logo.png",
+    image: "https://shrijideveloper.in/logo.png",
+
+    description:
+      "Premium residential plots with modern amenities, legal security, and flexible payment plans.",
+
+    areaServed: {
+      "@type": "Country",
+      name: "India",
+    },
+
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IN",
+    },
+
+    sameAs: [
+      "https://www.facebook.com/profile.php?id=61590441991071",
+      "https://www.instagram.com/shrijidevelopers_official",
+    ],
+  };
+
+
+
   return (
     <html
       lang="hi"
       className={`${beVietnamPro.variable} ${notoSans.variable} scroll-smooth antialiased`}
-     
+
     >
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+        {/* Theme */}
+        <meta name="theme-color" content="#ffffff" />
+
+        {/* Geo Tags */}
+        <meta name="geo.region" content="IN" />
+        <meta name="geo.country" content="India" />
+
+        {/* Schema.org Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(realEstateSchema),
+          }}
+        />
       </head>
       <body className="min-h-screen bg-background text-on-surface selection:bg-secondary-container selection:text-on-secondary-container font-body-md">
         {children}

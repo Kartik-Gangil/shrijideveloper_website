@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 import { bookVisit } from "@/app/actions/property"
 import PropertyCarousel from "../component/PropertyCarousel";
+import type { Metadata } from "next";
 
 // interface Property {
 //     title: string;
@@ -24,6 +25,71 @@ interface PageProps {
         slug: string;
     }>;
 }
+export async function generateMetadata(
+    { params }: PageProps
+): Promise<Metadata> {
+
+    const { slug } = await params;
+
+    await connectToDatabase();
+
+    const property = await PropertyModel.findById(slug).lean();
+
+    if (!property) {
+        return {
+            title: "Property Not Found",
+        };
+    }
+
+    return {
+        title: `${property.title} | Residential Plot in Morena`,
+        description: property.description?.slice(0, 160),
+
+        keywords: [
+            property.title,
+            "Plots in Morena",
+            "Residential Plots in Morena",
+            "Property in Morena",
+            "Land for Sale in Morena",
+            "Township in Morena",
+            property.address ?? "",
+            "Real Estate Morena",
+            "Investment Plots Morena",
+            "Premium Plots Morena",
+        ],
+
+        alternates: {
+            canonical: `https://shrijideveloper.in/property/${slug}`,
+        },
+
+        openGraph: {
+            title: property.title,
+            description: property.description,
+            url: `https://shrijideveloper.in/property/${slug}`,
+            siteName: "ShriJi Developer",
+
+            images: [
+                {
+                    url: property.images?.[0] || "/og-image.jpg",
+                    width: 1200,
+                    height: 630,
+                    alt: property.title,
+                },
+            ],
+
+            locale: "en_IN",
+            type: "website",
+        },
+
+        twitter: {
+            card: "summary_large_image",
+            title: property.title,
+            description: property.description,
+            images: [property.images?.[0] || "/og-image.jpg"],
+        },
+    };
+}
+
 
 export default async function PropertyShowcase({ params }: PageProps) {
 
@@ -36,7 +102,31 @@ export default async function PropertyShowcase({ params }: PageProps) {
     if (!property) {
         notFound();
     }
+    const propertySchema = {
+        "@context": "https://schema.org",
+        "@type": "Residence",
 
+        name: property.title,
+
+        description: property.description,
+
+        image: property.images,
+
+        address: {
+            "@type": "PostalAddress",
+            streetAddress: property.address,
+            addressLocality: "Morena",
+            addressRegion: "Madhya Pradesh",
+            addressCountry: "IN",
+        },
+
+        offers: {
+            "@type": "Offer",
+            price: property.price,
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+        },
+    };
     // const handleSubmit = () => {
     //     try {
 
@@ -47,7 +137,12 @@ export default async function PropertyShowcase({ params }: PageProps) {
 
     return (
         <div className="bg-[#F6F5F3] min-h-screen">
-
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(propertySchema),
+                }}
+            />
             {/* HERO */}
 
             <section className="relative h-[90vh]">
@@ -73,7 +168,9 @@ export default async function PropertyShowcase({ params }: PageProps) {
 
                         </span>
 
-                        <h1 className="text-white text-6xl font-bold mt-6">{property?.title}</h1>
+                        <h1 className="text-white text-6xl font-bold mt-6">
+                            {property?.title} - Premium Residential Plot in Morena
+                        </h1>
 
                         <p className="text-white text-xl mb-5 mt-4 max-w-2xl">{property?.description}</p>
 
@@ -274,7 +371,7 @@ export default async function PropertyShowcase({ params }: PageProps) {
                                 <Image
                                     src="https://res.cloudinary.com/drd6gndvh/image/upload/f_auto,q_auto,w_800/v1781807042/copy_of_map_ewtvp3.webp"
                                     className="w-full h-full object-cover"
-                                    alt="area map"
+                                    alt={`${property?.title} Location Map Morena`}
                                     height={10000}
                                     width={10000}
                                 />
@@ -336,7 +433,48 @@ export default async function PropertyShowcase({ params }: PageProps) {
                 </div>
 
             </section>
+            <section className="max-w-7xl mx-auto px-6 py-16">
+                <h2 className="text-4xl font-bold mb-8">
+                    Frequently Asked Questions
+                </h2>
 
+                <div className="space-y-6">
+
+                    <div>
+                        <h3 className="text-xl font-semibold">
+                            Is this property legally verified?
+                        </h3>
+
+                        <p className="text-gray-600 mt-2">
+                            Yes. All properties offered by ShriJi Developers
+                            come with complete legal documentation.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 className="text-xl font-semibold">
+                            Is EMI available?
+                        </h3>
+
+                        <p className="text-gray-600 mt-2">
+                            Yes. Flexible payment plans and EMI options are
+                            available for eligible buyers.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 className="text-xl font-semibold">
+                            Where is this project located?
+                        </h3>
+
+                        <p className="text-gray-600 mt-2">
+                            The project is located in Morena and offers
+                            excellent connectivity to nearby areas.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
 
             {/* FOOTER */}
 
