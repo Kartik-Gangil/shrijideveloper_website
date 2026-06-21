@@ -78,7 +78,7 @@ export default function App() {
     };
 
     // Handles simulated Brochure generation & mock PDF download
-    const handleBrochureSubmit = (e: React.FormEvent) => {
+    const handleBrochureSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setBrochureError("");
 
@@ -91,73 +91,66 @@ export default function App() {
             setBrochureError(t.brochure.errPhone);
             return;
         }
+        const res = await fetch("/api/user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: brochureName,
+                phone: brochurePhone,
+            }),
+        })
+        // console.log("Response from server:", res);
+
+        setBrochureName("");
+        setBrochurePhone("");
 
         setBrochureSuccess(true);
+        let currentProgress = 0;
         setDownloadProgress(0);
 
         // Simulate PDF compilation countdown progress bar
         const interval = setInterval(() => {
-            setDownloadProgress((prev) => {
-                if (prev >= 100) {
-                    clearInterval(interval);
-                    triggerBrochureDownload();
-                    return 100;
-                }
-                return prev + 20;
-            });
+            currentProgress += 20;
+
+            if (currentProgress >= 100) {
+                clearInterval(interval);
+                setDownloadProgress(100);
+                triggerBrochureDownload(); // Bina kisi event ke normal call karo
+            } else {
+                setDownloadProgress(currentProgress);
+            }
         }, 200);
     };
 
-    const triggerBrochureDownload = () => {
-        // Generate a temporary browser download for mockup brochure
-        const brochureContent = language === "en" ? `
-      =======================================================
-               SHRIJI DEVELOPER - OFFICIAL PROPERTY PORTFOLIO
-      =======================================================
-      DATE OF PUBLISHING: JUNE 2026
 
-      PROJECT HIGHLIGHTS:
 
-      1. ShriJI ENCLAVE (Hingona Khurd , Morena)
-         - Plot sizes: 1000+ Sq.Ft.
-         - High-tech solar grid street lighting and direct drainage.
-         - 2 min connectivity access to active Shaheed Path.
+    const triggerBrochureDownload = (e?: React.FormEvent) => {
+        if (e) {
+            e.preventDefault();    // Browser ka default action roko
+            e.stopPropagation();   // Event ko upar bubble hone se roko
+        }
+        // 1. Apne Cloudinary ke actual URLs yahan paste karein
+        const PdfUrl = "/shri ji pdf.pdf";
 
-      REGISTRY POLICIES:
-         - Immediate 100% Registry & Dakhil Kharij guaranteed.
-         - EMI structures for up to 36 Months.
+        // 2. Language ke basis par sahi URL aur file name select karein
+        let targetUrl = PdfUrl;
+        const fileName = "ShriJi_Developers_Brochure_2026.pdf";
 
-      THANK YOU FOR DOWNLOADING!
-      We look forward to hosting your physical site visit.
-      =======================================================
-    ` : `
-      =======================================================
-               श्रीजी डेवलपर - आधिकारिक संपत्ति पोर्टफोलियो
-      =======================================================
-      प्रकाशन तिथि: जून 2026
+        // 3. Cloudinary URL me 'fl_attachment' jodna taaki browser me PDF khulne ki jagah download ho
+        if (targetUrl.includes('upload/')) {
+            targetUrl = targetUrl.replace('upload/', 'upload/fl_attachment/');
+        }
 
-      परियोजना की मुख्य विशेषताएं:
-     1. श्रीजी एन्क्लेव (हिंगोना खुर्द टोल प्लाजा के पास, मुरैना)
-         - प्लॉट आकार: 1000+ वर्ग फीट।
-         - उन्नत सोलर ग्रिड स्ट्रीट लाइट और सुदृढ़ ड्रेनेज।
-
-      पंजीकरण नियमावली:
-         - तत्काल 100% रजिस्ट्री और दाखिल-खारिज की गारंटी।
-         - 36 महीने तक की पूर्ण ब्याज-मूक आसान ईएमआई।
-
-      डाउनलोड करने के लिए धन्यवाद!
-      हम आपकी सपरिवार साइट विजिट की प्रतीक्षा कर रहे हैं।
-      =======================================================
-    `;
-        const blob = new Blob([brochureContent], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
+        // 4. Temporary link create karke click karwana
         const link = document.createElement("a");
-        link.href = url;
-        link.download = language === "en" ? `ShriJi_Developers_Brochure_2026.txt` : `ShriJi_Developers_Brochure_Hindi_2026.txt`;
+        link.href = targetUrl;
+        link.setAttribute('download', fileName);
+
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        URL.revokeObjectURL(url);
     };
 
     // WhatsApp chat simulation engine response trees
