@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Navbar from '@/components/Navbar';
+import Navbar from '../properties/component/Navbar';
 
 // Types for structural data
 interface CoreValue {

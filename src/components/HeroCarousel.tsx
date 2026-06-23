@@ -32,7 +32,8 @@ const HeroCarousel = ({ images }: HeroCarouselProps) => {
                         <Image
                             src={data}
                             alt={`Premium real estate township slide ${index + 1}`}
-                            fill
+                            width={1000}
+                            height={1000}
                             priority={index === 0}
                             className="object-cover"
                             sizes="(max-width: 768px) 100vw, 50vw"

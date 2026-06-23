@@ -140,29 +140,31 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                     </div>
 
                     {/* Interactive Actions Grid */}
-                    <div className="flex gap-4">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
                       <button
                         onClick={() => setSelectedProject(project)}
-                        className="bg-primary-orange text-white px-6 py-3.5 rounded-full font-bold text-xs md:text-sm shadow-md shadow-primary-orange/20 cursor-pointer hover:bg-primary-orange/95 hover:shadow-lg active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5"
+                        className="bg-primary-orange text-white px-4 sm:px-6 rounded-full font-bold text-xs md:text-sm shadow-md shadow-primary-orange/20 cursor-pointer hover:bg-primary-orange/95 hover:shadow-lg active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5 w-full sm:w-auto whitespace-nowrap"
                       >
-                        <Layers className="h-4 w-4" />
+                        <Layers className="h-4 w-4 shrink-0" />
                         <span>{t.detailsBtn}</span>
                       </button>
+
                       <button
                         onClick={() => {
                           setShowMapProject(project);
                           setSelectedPlot(null);
                         }}
-                        className="border border-secondary-green text-secondary-green px-6 py-3.5 rounded-full font-bold text-xs md:text-sm hover:bg-secondary-green/5 cursor-pointer active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5"
+                        className="border border-secondary-green text-secondary-green px-4 sm:px-6 rounded-full font-bold text-xs md:text-sm hover:bg-secondary-green/5 cursor-pointer active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5 w-full sm:w-auto whitespace-nowrap"
                       >
-                        <Map className="h-4 w-4" />
+                        <Map className="h-4 w-4 shrink-0" />
                         <span>{t.mapBtn}</span>
                       </button>
+
                       <Link
-                       href={"/offers"}
-                        className="border border-secondary-green text-secondary-green px-6 py-3.5 rounded-full font-bold text-xs md:text-sm hover:bg-secondary-green/5 cursor-pointer active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5"
+                        href={"/offers"}
+                        className="border border-secondary-green text-secondary-green px-4 sm:px-6 rounded-full font-bold text-xs md:text-sm hover:bg-secondary-green/5 cursor-pointer active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5 w-full sm:w-auto whitespace-nowrap"
                       >
-                        <TicketPercent className="h-4 w-4" />
+                        <TicketPercent className="h-4 w-4 shrink-0" />
                         <span>Offers</span>
                       </Link>
                     </div>
@@ -347,7 +349,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
 
                       <div>
                         <Image
-                          src={"https://res.cloudinary.com/drd6gndvh/image/upload/f_auto,q_auto,w_800/v1781807042/copy_of_map_ewtvp3.webp"}
+                          src={"https://res.cloudinary.com/drd6gndvh/image/upload/f_auto,q_auto,w_800/v1781807042/copy_of_map_ewtvp3.png"}
                           alt="map image"
                           className="w-full h-full object-cover rounded-2xl"
                           width={1000}

@@ -369,7 +369,7 @@ export default async function PropertyShowcase({ params }: PageProps) {
                             <div className="bg-white rounded-3xl overflow-hidden shadow">
 
                                 <Image
-                                    src="https://res.cloudinary.com/drd6gndvh/image/upload/f_auto,q_auto,w_800/v1781807042/copy_of_map_ewtvp3.webp"
+                                    src="https://res.cloudinary.com/drd6gndvh/image/upload/f_auto,q_auto,w_800/v1781807042/copy_of_map_ewtvp3.png"
                                     className="w-full h-full object-cover"
                                     alt={`${property?.title} Location Map Morena`}
                                     height={10000}

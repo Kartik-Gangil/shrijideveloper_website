@@ -45,10 +45,17 @@ export default function App() {
     const [hasBrochureClosed, setHasBrochureClosed] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setBrochureOpen(true)
-        }, 5000);
-        return () => clearTimeout(timer);
+        const hasSeenPopup = sessionStorage.getItem('hasSeenPopup');
+        if (!hasSeenPopup) {
+            // 2. Agar nahi aaya hai, toh 5 second ka timer start karein
+            const timer = setTimeout(() => {
+                setBrochureOpen(true);
+                // 3. sessionStorage me mark kar dein ki popup dikha diya gaya hai
+                sessionStorage.setItem('hasSeenPopup', 'true');
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
     }, []);
 
 
