@@ -3,9 +3,10 @@ export type Language = "en" | "hi";
 export interface TranslationDict {
   navbar: {
     projects: string;
-    emiPlans: string;
+    mapLayout: string;
     process: string;
     contact: string;
+    about: string;
     call: string;
     verifiedLayouts: string;
     brand: string;
@@ -142,6 +143,16 @@ export interface TranslationDict {
     successDetailsStatus: string;
     closeBtn: string;
   };
+  about: {
+    title: string;
+    headline: string;
+    description: string;
+    highlights: {
+      title: string;
+      description: string
+    }[];
+    ctaBTN: string
+  };
   footer: {
     desc: string;
     clearanceRera: string;
@@ -181,10 +192,11 @@ export interface TranslationDict {
 export const translations: Record<Language, TranslationDict> = {
   en: {
     navbar: {
-      projects: "Townships",
-      emiPlans: "EMI Plans",
+      projects: "Home",
+      mapLayout: "Map Layout",
       process: "Ownership Process",
       contact: "Contact Us",
+      about: "About Us",
       call: "Call",
       verifiedLayouts: "Govt. Verified & RERA Approved Layouts",
       brand: "ShriJi Developer",
@@ -212,11 +224,11 @@ export const translations: Record<Language, TranslationDict> = {
       cards: [
         {
           title: "100% Registry",
-          desc: "Immediate registry and mutation (Khatauni/Dakhil Kharij) for complete peace of mind.",
+          desc: "Immediate registry and mutation for complete peace of mind.",
         },
         {
           title: "Easy EMI",
-          desc: "Flexible 12 to 36 months plans available directly from developers.",
+          desc: "Flexible plans available.",
         },
         {
           title: "Prime Location",
@@ -253,7 +265,7 @@ export const translations: Record<Language, TranslationDict> = {
       pDesc: "Meticulously planned layouts designed for a modern lifestyle while preserving traditional community values. Fully compliant and possession-ready.",
       requestCab: "Request Site Consultation",
       lucknowTitle: "ShriJI Enclave",
-      teaserLucknow: "Hingona Khurd Near Toll Plaza, Morena | 1000 - 2500 Sq.Ft. A modern oasis featuring smart infrastructure and family-focused amenities.",
+      teaserLucknow: "Hingona Khurd Near Toll Plaza, Morena | 800 - 2500 Sq.Ft. A modern oasis featuring smart infrastructure and family-focused amenities.",
       dimensions: "Plot Dimensions",
       pricing: "Value Range",
       detailsBtn: "Details",
@@ -301,13 +313,13 @@ export const translations: Record<Language, TranslationDict> = {
         },
         {
           title: "Token & Booking",
-          desc: "Select your active preferred layout plot from our layout maps and book it with a min. nominal token amount of ₹21,000.",
+          desc: "Select your active preferred layout plot from our layout maps and book it with a min.",
           details: "📁 Document checklist: PAN CARD, Aadhar Card, and 2 passport photos.",
         },
         {
           title: "EMI / Payment Planner",
-          desc: "Choose from our easy flexible interest-free monthly installment layouts that fits your physical household cash flow comfortably.",
-          details: "💳 Support: Custom plans from 12 to 36 months directly with ShriJi Developers.",
+          desc: "Choose from our easy flexible monthly installment layouts that fits your physical household cash flow comfortably.",
+          details: "",
         },
         {
           title: "Registry & Mutation",
@@ -326,11 +338,11 @@ export const translations: Record<Language, TranslationDict> = {
           author: "Rajesh Kumar",
         },
         {
-          text: "I was extremely worried about Registry fraud in Uttar Pradesh. ShriJi Developers provided the complete Registry documents and Dakhil Kharij papers online prior to booking. Truly transparent and professional developers.",
+          text: "ShriJi Developers provided the complete Registry documents papers online prior to booking for our property in Hingona Khurd, Morena. Truly transparent and professional developers.",
           author: "Sanjay Mishra"
         },
         {
-          text: "Very comfortable payment terms. The interest-free installment options helped me purchase active commercial plots on Shaheed Path without taking banking loans. Recommended family developers!",
+          text: "Very comfortable payment terms. The installment options helped me purchase active commercial plots on Hingona Khurd, Morena easily. Recommended family developers!",
           author: "Preeti Sharma"
         }
       ],
@@ -361,6 +373,30 @@ export const translations: Record<Language, TranslationDict> = {
       successDetailsProject: "Requested Block",
       successDetailsStatus: "Land Specialist has been notified. Expected response within 2 hours.",
       closeBtn: "Close Ticket Window",
+    },
+    about: {
+      title: "Who We Are",
+      headline: "Building Trust & Sustainable Communities",
+      description: " At ShriJi Developers, we create thoughtfully planned townships that combine modern infrastructure, legal transparency, and long-term value. Our flagship RERA-approved project, ShriJi Enclave, stands as a benchmark for secure real estate investments.",
+      highlights: [
+        {
+          title: "RERA Approved Projects",
+          description: "Fully compliant and verified development ensuring complete peace of mind."
+        },
+        {
+          title: "Transparent Documentation",
+          description: "Clear, legitimate titles and ethical documentation for every single plot."
+        },
+        {
+          title: "Prime Growth Locations",
+          description: "Strategically situated in high-potential corridors ensuring high future returns."
+        },
+        {
+          title: "Quality Infrastructure",
+          description: "Designed with premium connectivity, wider roads, and green spaces."
+        },
+      ],
+      ctaBTN: "Read Our Full Story"
     },
     footer: {
       desc: "Registered Real Estate Developers specializing in Government-Verified residential and commercially-zoned express plot developments with clean titles and fast transfer.",
@@ -399,10 +435,11 @@ export const translations: Record<Language, TranslationDict> = {
   },
   hi: {
     navbar: {
-      projects: "टाउनशिप",
-      emiPlans: "ईएमआई योजनाएं",
+      projects: "आवास",
+      mapLayout: "नक्शा लेआउट",
       process: "स्वामित्व प्रक्रिया",
       contact: "संपर्क करें",
+      about: "हमारे बारे में",
       call: "कॉल करें",
       verifiedLayouts: "शासन द्वारा सत्यापित व रेरा स्वीकृत लेआउट",
       brand: "श्रीजी डेवलपर",
@@ -430,11 +467,11 @@ export const translations: Record<Language, TranslationDict> = {
       cards: [
         {
           title: "100% रजिस्ट्री",
-          desc: "पूर्ण मानसिक शांति के लिए तत्काल रजिस्ट्री और दाखिल-खारिज (खतौनी/दाखिल ख़ारिज) की त्वरित सुविधा।",
+          desc: "पूर्ण मानसिक शांति के लिए तत्काल रजिस्ट्री की त्वरित सुविधा।",
         },
         {
           title: "आसान ईएमआई",
-          desc: "शून्य अतिरिक्त प्रभार के साथ डेवलपर द्वारा सीधे प्रदत्त 12 से 36 महीने की ब्याज-मुक्त समान किस्तें।",
+          desc: "ब्याज-मुक्त समान किस्तें।",
         },
         {
           title: "सर्वश्रेष्ठ स्थान",
@@ -471,7 +508,7 @@ export const translations: Record<Language, TranslationDict> = {
       pDesc: "पारंपरिक पारिवारिक मूल्यों और सुरक्षा को संजोए हुए आधुनिक जीवन शैली की जरूरतों के अनुसार योजनाबद्ध रूप से तैयार लेआउट। कब्जे के साथ तत्काल उपलब्ध।",
       requestCab: "निःशुल्क साइट विजिट गाड़ी बुक करें",
       lucknowTitle: "श्रीजी एन्क्लेव",
-      teaserLucknow: "हिंगोना खुर्द टोल प्लाजा के पास, मुरैना | 1000 - 2500 वर्ग फीट। आधुनिक स्मार्ट इन्फ्रास्ट्रक्चर और परिवार अनुकूल पार्क से सुसज्जित स्वर्ग।",
+      teaserLucknow: "हिंगोना खुर्द टोल प्लाजा के पास, मुरैना | 800 - 2500 वर्ग फीट। आधुनिक स्मार्ट इन्फ्रास्ट्रक्चर और परिवार अनुकूल पार्क से सुसज्जित स्वर्ग।",
       dimensions: "प्लॉट आकार",
       pricing: "मूल्य का दायरा",
       detailsBtn: "विस्तृत विवरण",
@@ -519,13 +556,13 @@ export const translations: Record<Language, TranslationDict> = {
         },
         {
           title: "टोकन व बुकिंग",
-          desc: "मानचित्र से अपने मनपसंद प्लॉट का चुनाव करें और मात्र ₹21,000 की न्यूनतम टोकन राशि देकर इसे आरक्षित करवाएं।",
+          desc: "मानचित्र से अपने मनपसंद प्लॉट का चुनाव करें और मात्र न्यूनतम टोकन राशि देकर इसे आरक्षित करवाएं।",
           details: "📁 आवश्यक दस्तावेज: पैन कार्ड, आधार कार्ड और 2 रंगीन पासपोर्ट आकार के फोटो।",
         },
         {
           title: "किस्त भुगतान योजना",
           desc: "बिना किसी वित्तीय बोझ के, हमारे विशेष ब्याज-मुक्त मासिक किस्तों की योजना में से अपने अनुकूल विकल्प चुनें।",
-          details: "💳 सुविधा: 12 से 36 महीने की आसान अवधि सीधे श्रीजी डेवलपर्स के साथ अनुबंधित करें।",
+          details: "",
         },
         {
           title: "रजिस्ट्री और दाखिल-खारिज",
@@ -540,15 +577,15 @@ export const translations: Record<Language, TranslationDict> = {
       pDesc: "सेना के अधिकारियों, सेवानिवृत्त शिक्षकों और व्यापारियों आदि वास्तविक प्लॉट मालिकों के सत्य एवं पारदर्शी अनुभव पढ़ें।",
       testimonials: [
         {
-          text: "श्रीजी डेवलपर्स के साथ निवेश करना मेरे बच्चों के उज्जवल भविष्य के लिए लिया गया सर्वश्रेष्ठ निर्णय था। सारी प्रक्रिया शीशे की तरह साफ थी, सरकारी दस्तावेज पूर्ण थे और कर्मचारियों ने रजिस्ट्री कार्यालय में खुद साथ रहकर काम कराया।",
+          text: "श्रीजी डेवलपर्स (Shriji Developers) के साथ निवेश करना मेरे बच्चों के भविष्य के लिए सबसे अच्छा फैसला था। पूरी प्रक्रिया पारदर्शी थी, जमीन के सभी कागजात सरकार द्वारा सत्यापित थे, और उनके स्टाफ ने उप-पंजीयक (sub-registrar) कार्यालय में पंजीकरण के हर कदम पर हमारा मार्गदर्शन किया।",
           author: "राजेश कुमार"
         },
         {
-          text: "मुझे पहले जमीन खरीद और धोखाधड़ी का बहुत डर था। पर श्रीजी की टीम ने बुकिंग से पूर्व ही सारे सत्यापित स्वामित्व दस्तावेज़ और खतौनी हमें ऑनलाइन उपलब्ध करा दी। बेहद ईमानदार और पेशेवर लोग हैं।",
+          text: "श्रीजी डेवलपर्स ने बुकिंग से पहले ही हमें हिंगोना खुर्द, मुरैना में हमारी संपत्ति के पूरे रजिस्ट्री दस्तावेज ऑनलाइन उपलब्ध करा दिए थे। वास्तव में पारदर्शी और पेशेवर डेवलपर्स।",
           author: "संजय मिश्रा"
         },
         {
-          text: "बहुत ही आरामदायक भुगतान विकल्प हैं। बिना बैंक लोन के ब्याज-मुक्त किस्तों की अनूठी योजना ने मुझे शहीद पथ पर व्यावसायिक उपयोग के लिए प्लॉट खरीदने में बड़ी मदद दी। उत्तर प्रदेश के सबसे भरोसेमंद डेवलपर!",
+          text: "भुगतान की शर्तें बहुत आरामदायक हैं। किश्तों के विकल्पों ने मुझे हिंगोना खुर्द, मुरैना में आसानी से कमर्शियल प्लॉट खरीदने में मदद की। सभी परिवारों के लिए एक भरोसेमंद डेवलपर्स!",
           author: "प्रीति शर्मा"
         }
       ],
@@ -580,6 +617,32 @@ export const translations: Record<Language, TranslationDict> = {
       successDetailsStatus: "भूमि सलाहकार को संज्ञान दे दिया गया है। आगामी 2 घंटे के भीतर आपसे संपर्क किया जाएगा।",
       closeBtn: "टिकट विंडो बंद करें",
     },
+
+    about: {
+      title: "हम कौन हैं",
+      headline: "विश्वास और टिकाऊ समुदायों का निर्माण",
+      description: "ShriJi Developers में, हम सोच-समझकर बनाई गई टाउनशिप का निर्माण करते हैं जो आधुनिक बुनियादी ढांचे, कानूनी पारदर्शिता और दीर्घकालिक मूल्य को जोड़ती हैं। हमारा प्रमुख रेरा (RERA) स्वीकृत प्रोजेक्ट, ShriJi Enclave, सुरक्षित रियल एस्टेट निवेश के लिए एक बेंचमार्क के रूप में खड़ा है।",
+      highlights: [
+        {
+          title: "रेरा (RERA) स्वीकृत प्रोजेक्ट्स",
+          description: "पूरी तरह से अनुपालन और सत्यापित विकास जो आपको पूर्ण मानसिक शांति सुनिश्चित करता है।"
+        },
+        {
+          title: "पारदर्शी दस्तावेज़ीकरण",
+          description: "प्रत्येक प्लॉट के लिए स्पष्ट, वैध मालिकाना हक और नैतिक दस्तावेज़।"
+        },
+        {
+          title: "प्राइम ग्रोथ लोकेशन्स",
+          description: "रणनीतिक रूप से उच्च क्षमता वाले क्षेत्रों में स्थित, जो भविष्य में शानदार रिटर्न सुनिश्चित करते हैं।"
+        },
+        {
+          title: "गुणवत्तापूर्ण बुनियादी ढांचा",
+          description: "बेहतर कनेक्टिविटी, चौड़ी सड़कों और हरित क्षेत्रों (ग्रीन स्पेस) के साथ डिज़ाइन किया गया।"
+        },
+      ],
+      ctaBTN: "हमारी पूरी कहानी पढ़ें"
+    },
+
     footer: {
       desc: "शासन द्वारा सत्यापित, विवाद-मुक्त व तत्काल कब्जा योग आवासीय और व्यावसायिक प्लाटिंग योजनाओं के विकास में अग्रणी एवं प्रतिष्ठित सरकारी पंजीकृत रियल एस्टेट डेवलपर।",
       clearanceRera: "100% रेरा पंजीकृत पारदर्शी लेआउट",

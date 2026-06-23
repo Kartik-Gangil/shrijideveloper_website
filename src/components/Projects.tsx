@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Map, Layers, Compass, Zap, Check, Shield } from "lucide-react";
+import { X, Map, Layers, Compass, Zap, Check, Shield, TicketPercent } from "lucide-react";
 import { translations, Language } from "../utils/translation";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Project {
   id: string;
@@ -98,11 +99,13 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                 {/* Image Section */}
                 <div className={`lg:col-span-7 relative ${isEven ? "lg:order-1" : "lg:order-2"}`}>
                   <div className={`absolute -top-6 ${isEven ? "-left-6" : "-right-6"} w-32 h-32 bg-primary-orange/5 asymmetric-blob -z-10`}></div>
-                  <img
+                  <Image
                     alt={project.title}
                     className="w-full aspect-16/10 object-cover organic-radius shadow-xl hover:scale-[1.01] transition-transform duration-500"
                     src={project.image}
                     referrerPolicy="no-referrer"
+                    width={1000}
+                    height={1000}
                   />
                 </div>
 
@@ -155,6 +158,13 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
                         <Map className="h-4 w-4" />
                         <span>{t.mapBtn}</span>
                       </button>
+                      <Link
+                       href={"/offers"}
+                        className="border border-secondary-green text-secondary-green px-6 py-3.5 rounded-full font-bold text-xs md:text-sm hover:bg-secondary-green/5 cursor-pointer active:scale-95 transition-all flex h-11 items-center justify-center gap-1.5"
+                      >
+                        <TicketPercent className="h-4 w-4" />
+                        <span>Offers</span>
+                      </Link>
                     </div>
                   </div>
                 </div>

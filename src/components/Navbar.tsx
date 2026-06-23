@@ -1,9 +1,10 @@
+'use client'
 import { useState } from "react";
 import { Phone, Menu, X, Globe, User2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { translations, Language } from "../utils/translation";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface NavbarProps {
   onNavigate?: (section: string) => void;
@@ -15,16 +16,16 @@ interface NavbarProps {
 export default function Navbar({ onNavigate, activeSection, language = 'hi', onToggleLanguage }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const t = translations[language].navbar;
-  const router = useRouter();
   // const location = usePathname();
   // console.log("Current path:", location);
 
 
   const navItems = [
-    { id: "projects", label: t.projects },
-    { id: "emi-plans", label: t.emiPlans },
+    { id: "hero", label: t.projects },
+    { id: "map-layout", label: t.mapLayout },
     { id: "process", label: t.process },
     { id: "contact", label: t.contact },
+    { id: "about", label: t.about },
   ];
 
   const handleNavClick = (id: string) => {
@@ -37,7 +38,7 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-[#dbc2b0]/20 shadow-xs">
-      <nav className="flex justify-between items-center w-full px-4 md:px-16 py-4 max-w-7xl mx-auto">
+      <nav className="flex justify-between items-center w-full px-4 md:px-10 py-4 max-w-7xl mx-auto">
         {/* Brand Logo and Text */}
         <div
           onClick={() => handleNavClick("hero")}
@@ -70,14 +71,13 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
               {item.label}
             </button>
           ))}
-          <button
-
-            onClick={() => router.push("/properties")}
+          <Link
+            href={"/properties"}
             className={`pb-1 transition-all cursor-pointer border-b-2 hover:text-secondary-green "text-[#554336] border-transparent hover:border-[#dbc2b0]"
               }`}
           >
             Properties
-          </button>
+          </Link>
 
 
         </div>
@@ -103,14 +103,14 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
             <span className="hidden sm:inline">+916262777411</span>
             {/* <span className="sm:hidden">{t.call}</span> */}
           </a>
-          <button
+          <Link
             title="user"
-            onClick={() => router.push("/auth/login")}
+            href={"/auth/login"}
             className={`pb-1 transition-all cursor-pointer border-b-2 hover:text-secondary-green "text-[#554336] border-transparent hover:border-[#dbc2b0]"
               }`}
           >
             <User2 />
-          </button>
+          </Link>
           {/* Toggle Hamburger on Mobile */}
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -144,13 +144,12 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
                   {item.label}
                 </button>
               ))}
-              <button
-                
-                onClick={() => router.push("/properties")}
+              <Link
+                href={"/properties"}
                 className={`text-left py-2 hover:text-secondary-green border-b border-[#dbc2b0]/1 text-[#554336]`}
               >
                 Properties
-              </button>
+              </Link>
               <div className="pt-2 text-center text-xs text-[#554336]/60">
                 {t.verifiedLayouts}
               </div>

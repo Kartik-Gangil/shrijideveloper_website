@@ -3,11 +3,11 @@ import { MapPin, Shield, CheckCircle, FileText } from "lucide-react";
 import Image from "next/image";
 
 interface FooterProps {
-  onNavigate: (section: string) => void;
+  onNavigate?: (section: string) => void;
   language: Language;
 }
 
-export default function Footer({ onNavigate, language }: FooterProps) {
+export default function Footer({ onNavigate = () => {}, language }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const t = translations[language].footer;
   const b = translations[language].navbar;
@@ -46,7 +46,7 @@ export default function Footer({ onNavigate, language }: FooterProps) {
             onClick={() => onNavigate("emi-plans")}
             className="text-[#554336] hover:text-secondary-green transition-colors cursor-pointer"
           >
-            {b.emiPlans}
+            {b.mapLayout}
           </button>
           <button
             onClick={() => onNavigate("process")}
@@ -59,6 +59,12 @@ export default function Footer({ onNavigate, language }: FooterProps) {
             className="text-[#554336] hover:text-secondary-green transition-colors cursor-pointer"
           >
             {b.contact}
+          </button>
+          <button
+            onClick={() => onNavigate("contact")}
+            className="text-[#554336] hover:text-secondary-green transition-colors cursor-pointer"
+          >
+            {b.about}
           </button>
         </div>
 

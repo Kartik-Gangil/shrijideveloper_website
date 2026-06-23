@@ -43,7 +43,7 @@ export default function Footer({ language }: FooterProps) {
                     <button
                         className="text-[#554336] hover:text-secondary-green transition-colors cursor-pointer"
                     >
-                        {b.emiPlans}
+                        {b.mapLayout}
                     </button>
                     <button
                         className="text-[#554336] hover:text-secondary-green transition-colors cursor-pointer"

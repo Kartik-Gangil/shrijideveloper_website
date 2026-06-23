@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const router = useRouter();
+
     const navItems = [
         { id: 1, path: "/", label: "Townships" },
         { id: 2, path: "/", label: "EMI Plans" },
@@ -15,19 +15,12 @@ export default function Navbar() {
         { id: 4, path: "/", label: "Contact Us" },
     ];
 
-    const handleNavClick = (path: string) => {
-        router.push(path);
-        setIsOpen(false);
-    };
-
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-[#dbc2b0]/20 shadow-xs">
             <nav className="flex justify-between items-center w-full px-4 md:px-16 py-4 max-w-7xl mx-auto">
                 {/* Brand Logo and Text */}
-                <div
-                    onClick={() => handleNavClick("/")}
-                    className="flex items-center gap-2 cursor-pointer group"
-                >
+
+                <Link href={"/"} className="flex items-center gap-2 cursor-pointer group">
                     <Image
                         src={"/logo.png"}
                         alt="ShriJi Developer Logo"
@@ -39,18 +32,19 @@ export default function Navbar() {
                     <span className="font-be-vietnam text-sm md:text-2xl font-bold text-secondary-green tracking-tight">
                         ShriJi Developer
                     </span>
-                </div>
+                </Link>
+
 
                 {/* Desktop Navigation Links */}
                 <div className="hidden md:flex gap-8 items-center font-noto-sans text-sm font-medium">
                     {navItems.map((item) => (
-                        <button
+                        <Link
                             key={item.id}
-                            onClick={() => handleNavClick(item.path)}
+                            href={item.path}
                             className={`pb-1 transition-all cursor-pointer border-b-2 hover:text-secondary-green text-[#554336] border-transparent hover:border-[#dbc2b0]`}
                         >
                             {item.label}
-                        </button>
+                        </Link>
                     ))}
                 </div>
 
@@ -87,14 +81,14 @@ export default function Navbar() {
                     >
                         <div className="px-6 py-4 flex flex-col gap-4 font-noto-sans text-base font-medium">
                             {navItems.map((item) => (
-                                <button
+                                <Link
                                     key={item.id}
-                                    onClick={() => handleNavClick(item.path)}
+                                    href={item.path}
                                     className={`text-left py-2 hover:text-secondary-green border-b border-[#dbc2b0]/10  text-secondary-green font-bold
-                                    `}
+                                        `}
                                 >
                                     {item.label}
-                                </button>
+                                </Link>
                             ))}
                             <div className="pt-2 text-center text-xs text-[#554336]/60">
                                 Verified Layouts

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Noto_Sans } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
 const beVietnamPro = Be_Vietnam_Pro({
   variable: "--font-be-vietnam-pro",
@@ -124,13 +125,13 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://shrijidevelopers.com",
+    canonical: "https://shrijideveloper.in",
   },
 
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://shrijidevelopers.com",
+    url: "https://shrijideveloper.in",
     siteName: "ShriJi Developers",
 
     title:
@@ -198,7 +199,7 @@ export default function RootLayout({
     ],
   };
 
-
+  const message = "Hello, I’m looking to inquire about your available plots. Please share a brochure or have a representative call me back at your earliest convenience."
 
   return (
     <html
@@ -226,6 +227,43 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-on-surface selection:bg-secondary-container selection:text-on-secondary-container font-body-md">
         {children}
+
+        
+        <div className="fixed bottom-8 right-8 z-[100] font-noto-sans flex flex-col items-end gap-3 pointer-events-none">
+          {/* instagram */}
+          <a
+            href={`https://www.instagram.com/shrijidevelopers_official/`}
+            className="relative flex items-center justify-center sm:w-12 sm:h-12 w-8 h-8 text-[#ffffff] rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer pointer-events-auto"
+            aria-label="Open Assistance Chat"
+          >
+            <span className="absolute inset-0 rounded-full bg-[#FF0A5F] animate-ping opacity-20"></span>
+            <Image src={'https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg'} width={100} height={100} alt="instagram icon" />
+          </a>
+
+          {/* facebook */}
+          <a
+            href={`https://www.facebook.com/profile.php?id=61590441991071`}
+            className="relative flex items-center justify-center sm:w-12 sm:h-12 w-8 h-8 bg-[#0866FF] text-[#ffffff] rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer pointer-events-auto"
+            aria-label="Open Assistance Chat"
+          >
+            <span className="absolute inset-0 rounded-full bg-[#0866FF] animate-ping opacity-20"></span>
+            <Image src={'https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg'} width={100} height={100} alt="facebook icon" />
+          </a>
+
+          {/* whatsapp */}
+          {/* The Action green WhatsApp Pill Button itself */}
+          <a
+            href={`https://wa.me/916262777411?text=${message}`}
+            className="relative flex items-center justify-center sm:w-12 sm:h-12 w-8 h-8 bg-gray-100  text-[#ffffff] rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer pointer-events-auto"
+            aria-label="Open Assistance Chat"
+          >
+            <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>
+            <Image src={'https://upload.wikimedia.org/wikipedia/commons/4/4c/WhatsApp_Logo_green.svg'} width={100} height={100} alt="whatsapp icon" />
+          </a>
+
+
+
+        </div>
       </body>
     </html>
   );

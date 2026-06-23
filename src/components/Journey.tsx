@@ -47,7 +47,7 @@ export default function Journey({ language }: JourneyProps) {
       <div className="absolute -bottom-24 -left-20 w-80 h-80 bg-white/5 asymmetric-blob"></div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-16 text-center">
-        
+
         {/* Header Block */}
         <div className="max-w-xl mx-auto mb-20 space-y-3">
           <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-[#8dfc75] bg-white/10 px-3.5 py-1.5 rounded-full inline-block">
@@ -65,7 +65,7 @@ export default function Journey({ language }: JourneyProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, idx) => {
             return (
-              <motion.div 
+              <motion.div
                 key={step.num}
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ export default function Journey({ language }: JourneyProps) {
                 transition={{ duration: 0.5, delay: idx * 0.15 }}
                 className="relative group p-6 bg-white/5 rounded-[36px] border border-white/10 flex flex-col justify-between h-full font-noto-sans hover:bg-white/10 transition-all duration-300"
               >
-                
+
                 {/* Visual Line connector for desktop */}
                 {idx < 3 && (
                   <div className="hidden lg:block absolute top-16 -right-6 w-12 h-[2px] bg-white/25 z-0" />
@@ -102,7 +102,7 @@ export default function Journey({ language }: JourneyProps) {
                 </div>
 
                 {/* Small Helpful tooltip style details at the bottom of card */}
-                <div className="mt-6 pt-4 border-t border-white/10 text-left">
+                {step.details === "" ? <></> : <div className="mt-6 pt-4 border-t border-white/10 text-left">
                   <p className="text-[10px] text-[#8dfc75] font-semibold tracking-wide flex items-center gap-1">
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     <span>{language === "en" ? "How it works:" : "कैसे काम करता है:"}</span>
@@ -110,7 +110,7 @@ export default function Journey({ language }: JourneyProps) {
                   <p className="text-[10px] text-white/65 leading-relaxed mt-1 font-medium italic">
                     {step.details}
                   </p>
-                </div>
+                </div>}
 
               </motion.div>
             );

@@ -1,18 +1,17 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Navbar from '../component/Navbar';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link'; 
 import { Property } from '../page';
+import Footer from '../component/Footer';
 
 interface ClientProps {
     initialProperties: Property[];
 }
 
 export default function PropertyListingClient({ initialProperties }: ClientProps) {
-    const router = useRouter();
-
     const [titleQuery, setTitleQuery] = useState('');
     const [locationQuery, setLocationQuery] = useState('');
     const [sizeFilter, setSizeFilter] = useState('any');
@@ -155,56 +154,62 @@ export default function PropertyListingClient({ initialProperties }: ClientProps
                         {filteredProperties.map((property) => (
                             <div
                                 key={property.id}
-                                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition"
+                                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col justify-between"
                             >
-                                <div className="relative h-56 sm:h-64 w-full">
-                                    <Image
-                                        src={property.images?.[0] || '/placeholder.jpg'}
-                                        alt={property.title || 'plot image'}
-                                        fill
-                                        sizes="(max-w-7xl) 33vw, 100vw"
-                                        className="object-cover"
-                                    />
-                                    <span className="absolute top-3 left-3 bg-green-600 text-white px-3 py-1 rounded-full text-xs">
-                                        Verified
-                                    </span>
-                                </div>
-
-                                <div className="p-4 sm:p-6">
-                                    <h3 className="font-bold text-lg sm:text-xl line-clamp-1">
-                                        {property.title}
-                                    </h3>
-
-                                    <p className="text-gray-500 mt-2 text-sm line-clamp-1">
-                                        📍 {property.address}
-                                    </p>
-
-                                    <div className="flex justify-between mt-5 text-sm sm:text-base">
-                                        <div>
-                                            <p className="text-gray-500">Price</p>
-                                            <p className="font-bold text-[#A86300]">
-                                                ₹{property.price.toLocaleString('en-IN')}
-                                            </p>
-                                        </div>
-
-                                        <div>
-                                            <p className="text-gray-500">Size</p>
-                                            <p className="font-bold">{property.area} sqft</p>
-                                        </div>
+                                <div>
+                                    <div className="relative h-56 sm:h-64 w-full">
+                                        <Image
+                                            src={property.images?.[0] || '/placeholder.jpg'}
+                                            alt={property.title || 'plot image'}
+                                            fill
+                                            sizes="(max-w-7xl) 33vw, 100vw"
+                                            className="object-cover"
+                                        />
+                                        <span className="absolute top-3 left-3 bg-green-600 text-white px-3 py-1 rounded-full text-xs">
+                                            Verified
+                                        </span>
                                     </div>
 
-                                    <button
-                                        className="mt-5 w-full bg-[#A86300] text-white py-3 rounded-xl hover:opacity-90 transition text-sm sm:text-base"
-                                        onClick={() => router.push(`properties/${property.id}`)}
+                                    <div className="p-4 sm:p-6 pb-0">
+                                        <h3 className="font-bold text-lg sm:text-xl line-clamp-1">
+                                            {property.title}
+                                        </h3>
+
+                                        <p className="text-gray-500 mt-2 text-sm line-clamp-1">
+                                            📍 {property.address}
+                                        </p>
+
+                                        <div className="flex justify-between mt-5 text-sm sm:text-base">
+                                            <div>
+                                                <p className="text-gray-500">Price</p>
+                                                <p className="font-bold text-[#A86300]">
+                                                    ₹{property.price.toLocaleString('en-IN')}
+                                                </p>
+                                            </div>
+
+                                            <div>
+                                                <p className="text-gray-500">Size</p>
+                                                <p className="font-bold">{property.area} sqft</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 sm:p-6 pt-0">
+                                    {/* Converted Button click event to semantic Next Link */}
+                                    <Link
+                                        href={`/properties/${property.id}`}
+                                        className="mt-5 w-full bg-[#A86300] text-white py-3 rounded-xl hover:opacity-90 transition text-sm sm:text-base inline-block text-center font-medium"
                                     >
                                         View Details
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
+            <Footer language='en' />
         </div>
     );
 }

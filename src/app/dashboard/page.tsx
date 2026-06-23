@@ -42,27 +42,29 @@ export default function AdminPropertyDashboard() {
     UsersCount: 0,
     totalValue: 0,
   });
-  const [loader, setLoader] = useState<boolean>(false);
 
-  // State for search filter
+  // Separation of loading states to prevent blocking the initial page draw
+  const [initialLoading, setInitialLoading] = useState<boolean>(true);
+  const [actionLoader, setActionLoader] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const router = useRouter();
 
   const handleOpenModal = async () => {
     setIsOpen(true);
-    setLoader(true);
+    setActionLoader(true);
     try {
       const data = await fetchLeads();
       setModalData(data);
     } catch (err) {
       console.error(err);
     } finally {
-      setLoader(false);
+      setActionLoader(false);
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = async (isFirstMount = false) => {
     try {
-      setLoader(true)
+      if (!isFirstMount) setActionLoader(true);
       const response = await fetch("/api/dashboard", {
         method: "GET",
         headers: {
@@ -71,40 +73,39 @@ export default function AdminPropertyDashboard() {
       });
       const data = await response.json();
       setDataFrame(data);
-      setLoader(false)
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error fetching dashboard data:", error);
-      setLoader(false)
+    } finally {
+      setInitialLoading(false);
+      setActionLoader(false);
     }
-  }
-  const router = useRouter();
+  };
 
   useEffect(() => {
     if (!isLoggedIn()) {
       router.replace('/auth/login');
+      return;
     }
-    fetchData();
-  }, [])
+    // Prefetching target redirect locations so they open instantly later
+    router.prefetch("/dashboard/addProperty");
+    fetchData(true);
+  }, []);
 
   const handleDelete = async (id: string) => {
     try {
-      setLoader(true)
+      setActionLoader(true);
       const res = await fetch(`/api/dashboard?id=${id}`, {
         method: "DELETE"
-      })
+      });
       if (res.ok) {
-        fetchData();
+        await fetchData(false);
       }
-      setLoader(false)
     } catch (error) {
-      console.log(error)
-      setLoader(false)
+      console.log(error);
+      setActionLoader(false);
     }
-  }
+  };
 
-
-  // Filter plots based on name (title), location (address), or status
   const filteredPlots = dataFrame.plot.filter((item) => {
     const query = searchQuery.toLowerCase();
     return (
@@ -117,8 +118,10 @@ export default function AdminPropertyDashboard() {
   return (
     <>
       <Navbar />
+      {/* actionLoader handles mutations like delete/modal safely without wiping page UI */}
+      {actionLoader && <Loader />}
+
       <section className="min-h-screen bg-[#F7F4F1] mt-15 p-6 lg:p-10">
-        {loader && <Loader />}
         <div className="max-w-7xl mx-auto">
 
           {/* HEADER */}
@@ -132,12 +135,15 @@ export default function AdminPropertyDashboard() {
               </p>
             </div>
 
-            <button className="bg-[#A86300] text-white px-8 py-5 rounded-2xl shadow-md font-semibold hover:cursor-pointer" onClick={() => router.push("/dashboard/addProperty")}>
+            <button
+              className="bg-[#A86300] text-white px-8 py-5 rounded-2xl shadow-md font-semibold hover:cursor-pointer"
+              onClick={() => router.push("/dashboard/addProperty")}
+            >
               ＋ Add New Property
             </button>
           </div>
 
-          {/* SEARCH */}
+          {/* SEARCH BAR */}
           <div className="bg-white rounded-3xl shadow-sm p-4 mt-10">
             <div className="flex flex-col lg:flex-row gap-4">
               <input
@@ -153,7 +159,7 @@ export default function AdminPropertyDashboard() {
             </div>
           </div>
 
-          {/* TABLE */}
+          {/* DATA TABLE */}
           <div className="bg-white rounded-3xl shadow-sm overflow-hidden mt-8">
             <div className="hidden md:grid grid-cols-5 px-8 py-6 bg-[#FAF7F4] font-semibold">
               <div>PROPERTY NAME</div>
@@ -163,7 +169,15 @@ export default function AdminPropertyDashboard() {
               <div>ACTIONS</div>
             </div>
 
-            {filteredPlots.length > 0 ? (
+            {initialLoading ? (
+              /* Inline non-blocking loader specifically inside the list section container */
+              <div className="p-20 text-center text-gray-500 font-medium">
+                <div className="animate-pulse flex flex-col items-center gap-2">
+                  <div className="w-8 h-8 border-4 border-[#A86300] border-t-transparent rounded-full animate-spin"></div>
+                  <span>Fetching current property directory listings...</span>
+                </div>
+              </div>
+            ) : filteredPlots.length > 0 ? (
               filteredPlots.map((item, index) => (
                 <div
                   key={item._id || index}
@@ -187,21 +201,26 @@ export default function AdminPropertyDashboard() {
                   <div>
                     <span
                       className={`px-4 py-2 rounded-full text-sm ${item.status === "available"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-gray-100 text-gray-600"}
-                      `}
+                          ? "bg-green-100 text-green-700"
+                          : "bg-gray-100 text-gray-600"
+                        }`}
                     >
                       ● {item.status}
                     </span>
                   </div>
 
                   <div className="flex gap-5 text-xl">
-                    <button title="edit" className="cursor-pointer p-3 rounded-full transition-colors duration-200 hover:bg-gray-200"
-                      onClick={() => router.push(`/dashboard/updateProperty/${item._id}/`)}>
+                    <button
+                      title="edit"
+                      className="cursor-pointer p-3 rounded-full transition-colors duration-200 hover:bg-gray-200"
+                      onClick={() => router.push(`/dashboard/updateProperty/${item._id}/`)}
+                    >
                       <Pencil size={18} />
                     </button>
 
-                    <button title="delete" className="cursor-pointer p-3 rounded-full transition-colors duration-200 hover:bg-gray-200"
+                    <button
+                      title="delete"
+                      className="cursor-pointer p-3 rounded-full transition-colors duration-200 hover:bg-gray-200"
                       onClick={() => handleDelete(item._id)}
                     >
                       <Trash2 size={18} />
@@ -215,7 +234,7 @@ export default function AdminPropertyDashboard() {
               </div>
             )}
 
-            {/* FOOTER */}
+            {/* FOOTER COUNTER */}
             <div className="flex flex-col lg:flex-row justify-between items-center px-8 py-6 border-t">
               <p className="text-sm text-gray-500">
                 Showing {filteredPlots.length} of {dataFrame.PlotCount} Properties
@@ -223,24 +242,24 @@ export default function AdminPropertyDashboard() {
             </div>
           </div>
 
-          {/* STATS */}
+          {/* ANALYTICAL METRIC CARDS */}
           <div className="grid md:grid-cols-3 gap-6 mt-10">
             {[
               {
                 title: "TOTAL PORTFOLIO",
-                value: `${dataFrame.PlotCount} Plots`,
+                value: initialLoading ? "..." : `${dataFrame.PlotCount} Plots`,
                 Icon: GalleryHorizontalEnd,
                 Action: () => console.log("none")
               },
               {
                 title: "ACTIVE ENQUIRIES",
-                value: `${dataFrame.UsersCount} Leads`,
+                value: initialLoading ? "..." : `${dataFrame.UsersCount} Leads`,
                 Icon: TrendingUp,
                 Action: handleOpenModal
               },
               {
                 title: "VALUE LOCKED",
-                value: `₹${dataFrame.totalValue.toLocaleString('en-IN')}`,
+                value: initialLoading ? "..." : `₹${dataFrame.totalValue.toLocaleString('en-IN')}`,
                 Icon: LandmarkIcon,
                 Action: () => console.log("none")
               },
@@ -273,8 +292,6 @@ export default function AdminPropertyDashboard() {
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
           <div className="bg-white w-full max-w-2xl rounded-3xl p-6 relative max-h-[85vh] flex flex-col shadow-2xl">
-
-            {/* Modal Header */}
             <div className="flex justify-between items-center pb-4 border-b">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">Active Lead Enquiries</h2>
@@ -289,7 +306,6 @@ export default function AdminPropertyDashboard() {
               </button>
             </div>
 
-            {/* Modal Scrollable Table Section */}
             <div className="overflow-y-auto mt-4 flex-1 rounded-xl border border-gray-100">
               {modalData && modalData.length > 0 ? (
                 <table className="w-full text-left border-collapse">
@@ -328,12 +344,11 @@ export default function AdminPropertyDashboard() {
                 </table>
               ) : (
                 <div className="p-10 text-center text-gray-500">
-                  {!loader && "No dynamic active leads found at this time."}
+                  {!actionLoader && "No dynamic active leads found at this time."}
                 </div>
               )}
             </div>
 
-            {/* Modal Footer */}
             <div className="pt-4 border-t mt-4 flex justify-end">
               <button
                 onClick={() => setIsOpen(false)}
@@ -342,10 +357,9 @@ export default function AdminPropertyDashboard() {
                 Close
               </button>
             </div>
-
           </div>
         </div>
       )}
     </>
-  )
+  );
 }

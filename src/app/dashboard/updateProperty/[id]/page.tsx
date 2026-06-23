@@ -163,13 +163,13 @@ export default function EditPropertyPage() {
       alert(
         "Property updated successfully"
       );
-
+      router.prefetch("/dashboard")
       router.push(
         "/dashboard"
       );
     } catch (error) {
       console.error(error);
-setLoading(false)
+      setLoading(false)
       alert(
         error instanceof Error
           ? error.message
@@ -181,7 +181,7 @@ setLoading(false)
 
   return (
     <>
-      {loading && <Loader/>}
+      {loading && <Loader />}
       <Navbar />
 
       <section className="bg-[#F7F4F1] min-h-screen py-12 my-8 px-5">

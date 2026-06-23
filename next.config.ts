@@ -23,7 +23,31 @@ const nextConfig: NextConfig = {
 
         hostname: "res.cloudinary.com",
 
-      }
+      },
+      {
+        protocol: "https",
+
+        hostname: "i.pinimg.com",
+
+      },
+      {
+        protocol: "https",
+
+        hostname: "www.shutterstock.com",
+
+      },
+      {
+        protocol: "https",
+
+        hostname: "encrypted-tbn0.gstatic.com",
+
+      },
+      {
+        protocol: "https",
+
+        hostname: "westdelhiclubsociety.in",
+
+      },
 
     ]
 

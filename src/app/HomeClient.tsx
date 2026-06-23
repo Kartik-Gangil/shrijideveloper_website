@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, Send, X, Phone, User, Check, Download, HelpCircle } from "lucide-react";
+import { X, Check, Download, HelpCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TrustSection from "@/components/TrustSection";
@@ -10,6 +10,11 @@ import Journey from "@/components/Journey";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { translations, Language } from "@/utils/translation";
+import Image from "next/image";
+import Features from "@/components/Features";
+import Map from "@/components/Map";
+import AboutUsSummary from "@/components/About";
+import Link from "next/link";
 
 interface Submissions {
     name: string;
@@ -19,7 +24,8 @@ interface Submissions {
     ticketId: string;
 }
 
-const message = "Hello, I’m looking to inquire about your available plots. Please share a brochure or have a representative call me back at your earliest convenience."
+
+// const message = "Hello, I’m looking to inquire about your available plots. Please share a brochure or have a representative call me back at your earliest convenience."
 
 export default function App() {
     const [language, setLanguage] = useState<Language>("hi");
@@ -27,33 +33,41 @@ export default function App() {
     const [prefilledProject, setPrefilledProject] = useState<string>("");
 
     const t = translations[language];
-
     // Interactive Brochure State
+
     const [brochureOpen, setBrochureOpen] = useState(false);
+    const [offerOpen, setOfferOpen] = useState(false);
     const [brochureName, setBrochureName] = useState("");
     const [brochurePhone, setBrochurePhone] = useState("");
     const [brochureError, setBrochureError] = useState("");
     const [brochureSuccess, setBrochureSuccess] = useState(false);
     const [downloadProgress, setDownloadProgress] = useState(0);
+    const [hasBrochureClosed, setHasBrochureClosed] = useState(false);
 
-    // WhatsApp Interactive Chat State
-    const [chatOpen, setChatOpen] = useState(false);
-    const [chatMessages, setChatMessages] = useState<
-        { sender: "client" | "agent"; text: string; time: string }[]
-    >([]);
-    const [chatInput, setChatInput] = useState("");
-    const [isTyping, setIsTyping] = useState(false);
-
-    // Reset/Initialize chat when language toggles
     useEffect(() => {
-        setChatMessages([
-            {
-                sender: "agent",
-                text: translations[language].whatsapp.welcomeMsg,
-                time: language === "en" ? "Just now" : "अभी-अभी"
-            }
-        ]);
-    }, [language]);
+        const timer = setTimeout(() => {
+            setBrochureOpen(true)
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, []);
+
+
+    // 2. Custom close handler for the Brochure Dialog
+    const closeBrochureAndOpenOffers = () => {
+        setBrochureOpen(false);
+
+        // Only trigger the offer dialog if it hasn't been handled yet
+        if (!hasBrochureClosed) {
+            setHasBrochureClosed(true);
+
+            // Optional: Add a tiny micro-delay (e.g., 300ms) so the exit animation finishes smoothly
+            setTimeout(() => {
+                setOfferOpen(true);
+            }, 3000);
+        }
+    };
+
+
 
     // Smooth scroll handler
     const handleScrollToSection = (sectionId: string) => {
@@ -153,62 +167,74 @@ export default function App() {
         document.body.removeChild(link);
     };
 
-    // WhatsApp chat simulation engine response trees
-    // const handleSendMessage = (e?: React.FormEvent) => {
-    //   if (e) e.preventDefault();
-    //   if (!chatInput.trim()) return;
 
-    //   const userMessage = chatInput.trim();
-    //   const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    //   setChatMessages((prev) => [
-    //     ...prev,
-    //     { sender: "client", text: userMessage, time: timeString }
-    //   ]);
-    //   setChatInput("");
-    //   setIsTyping(true);
-
-    //   // Match keywords to respond intelligently (bilingual support)
-    //   setTimeout(() => {
-    //     let botResponse = language === "en"
-    //       ? "Our specialist will connect shortly. For immediate details, please use our callback request form or call 1800-000-0000."
-    //       : "हमारे विशेषज्ञ शीघ्र ही आपसे संपर्क करेंगे। तत्काल विवरण के लिए, कृपया हमारे कॉल बैक फॉर्म का उपयोग करें या 1800-000-0000 पर कॉल करें।";
-
-    //     const cleanMsg = userMessage.toLowerCase();
-
-    //     const hasPrice = cleanMsg.includes("price") || cleanMsg.includes("rate") || cleanMsg.includes("budget") || cleanMsg.includes("cost") || cleanMsg.includes("रेट") || cleanMsg.includes("दाम") || cleanMsg.includes("बजट") || cleanMsg.includes("कीमत") || cleanMsg.includes("पैसा");
-    //     const hasLocation = cleanMsg.includes("location") || cleanMsg.includes("where") || cleanMsg.includes("address") || cleanMsg.includes("site") || cleanMsg.includes("कहाँ") || cleanMsg.includes("एड्रेस") || cleanMsg.includes("लोकेशन") || cleanMsg.includes("जगह");
-    //     const hasEmi = cleanMsg.includes("emi") || cleanMsg.includes("installment") || cleanMsg.includes("pay") || cleanMsg.includes("किस्त") || cleanMsg.includes("ईएमआई") || cleanMsg.includes("भुगतान");
-    //     const hasRegistry = cleanMsg.includes("registry") || cleanMsg.includes("legal") || cleanMsg.includes("rera") || cleanMsg.includes("रजिस्ट्री") || cleanMsg.includes("रेरा") || cleanMsg.includes("कागज");
-    //     const hasHello = cleanMsg.includes("hello") || cleanMsg.includes("hi") || cleanMsg.includes("namaste") || cleanMsg.includes("नमस्ते") || cleanMsg.includes("राम राम") || cleanMsg.includes("हेलो");
-
-    //     if (hasPrice) {
-    //       botResponse = t.whatsapp.resRates;
-    //     } else if (hasLocation) {
-    //       botResponse = t.whatsapp.resLocations;
-    //     } else if (hasEmi) {
-    //       botResponse = t.whatsapp.resEmi;
-    //     } else if (hasRegistry) {
-    //       botResponse = t.whatsapp.resRegistry;
-    //     } else if (hasHello) {
-    //       botResponse = t.whatsapp.resWelcome;
-    //     }
-
-    //     setChatMessages((prev) => [
-    //       ...prev,
-    //       { sender: "agent", text: botResponse, time: timeString }
-    //     ]);
-    //     setIsTyping(false);
-    //   }, 1000);
-    // };
-
-    // WhatsApp quick trigger prompt links
-    const selectQuickQuestion = (question: string) => {
-        setChatInput(question);
-        setTimeout(() => {
-            const msgInput = document.getElementById("chat-input-box");
-            if (msgInput) msgInput.focus();
-        }, 100);
-    };
+    const feature = [
+        {
+            id: 1,
+            image: "https://upload.wikimedia.org/wikipedia/commons/5/5a/House_with_flag_Pinhead_icon.svg",
+            text: "club house"
+        },
+        {
+            id: 2,
+            image: "https://upload.wikimedia.org/wikipedia/commons/9/94/Noun_Temple_tower_346642.svg",
+            text: "temple"
+        },
+        {
+            id: 3,
+            image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Pool_%28CoreUI_Icons_v1.0.0%29.svg",
+            text: "swimming pool"
+        },
+        {
+            id: 4,
+            image: "https://upload.wikimedia.org/wikipedia/commons/8/82/Maki1-garden-10.svg",
+            text: "garden"
+        },
+        {
+            id: 5,
+            image: "https://upload.wikimedia.org/wikipedia/commons/7/75/Map_icons_by_Scott_de_Jonge_-_gym.svg",
+            text: "gym"
+        },
+        {
+            id: 6,
+            image: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Maki2-town-hall-24.svg",
+            text: "party hall"
+        },
+        {
+            id: 7,
+            image: "https://upload.wikimedia.org/wikipedia/commons/4/44/Car_-_The_Noun_Project.svg",
+            text: "big parking"
+        },
+        {
+            id: 8,
+            image: "https://upload.wikimedia.org/wikipedia/commons/6/66/Manhole_cover_with_sewage_pipe_cross_section_Pinhead_icon.svg",
+            text: "underground sewer line"
+        },
+        {
+            id: 9,
+            image: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Road_-_Delapouite_-_game-icons.svg",
+            text: "40 feet wide roads"
+        },
+        {
+            id: 10,
+            image: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Adwaita_thunderbolt-symbolic.svg",
+            text: "electricity"
+        },
+        {
+            id: 11,
+            image: "https://upload.wikimedia.org/wikipedia/commons/0/01/Safety_and_Security_-_The_Noun_Project.svg",
+            text: "24 x 7 security"
+        },
+        {
+            id: 12,
+            image: "https://upload.wikimedia.org/wikipedia/commons/4/41/CCTV_surveillance_camera.svg",
+            text: "cctv camera"
+        },
+        {
+            id: 13,
+            image: "https://upload.wikimedia.org/wikipedia/commons/d/df/Solar_panel_-_The_Noun_Project.svg",
+            text: "solar light"
+        }
+    ];
 
     // Detect which section is in view to highlight in navbar
     useEffect(() => {
@@ -247,7 +273,6 @@ export default function App() {
                 language={language}
                 onToggleLanguage={() => setLanguage(prev => prev === "en" ? "hi" : "en")}
             />
-
             {/* 2. Hero Interactive Stage */}
             <div id="hero">
                 <Hero
@@ -262,9 +287,12 @@ export default function App() {
                     }}
                 />
             </div>
-
+            <Features feature={feature} />
             {/* 4. Listed townships vertical stack with active layout grid tap Selection */}
             <Projects language={language} onInquireProject={handleInquireProject} />
+
+            <Map language={language} />
+
             {/* 3. Why Choose trust framework & EMI interactive slider Math */}
             <TrustSection language={language} />
 
@@ -278,7 +306,7 @@ export default function App() {
                 prefilledProject={prefilledProject}
                 onClearPrefill={() => setPrefilledProject("")}
             />
-
+            <AboutUsSummary language={language} />
             {/* 7. Footer standard clearances */}
             <Footer language={language} onNavigate={handleScrollToSection} />
 
@@ -301,7 +329,7 @@ export default function App() {
                             className="relative bg-white rounded-[36px] max-w-md w-full p-6 md:p-8 shadow-2xl border border-[#dbc2b0]/50 z-10 font-noto-sans"
                         >
                             <button
-                                onClick={() => setBrochureOpen(false)}
+                                onClick={() => closeBrochureAndOpenOffers()}
                                 className="absolute top-5 right-5 p-2 rounded-full hover:bg-secondary-green/10 text-[#554336] cursor-pointer"
                                 aria-label="Close brochure modal"
                             >
@@ -407,11 +435,66 @@ export default function App() {
                 )}
             </AnimatePresence>
 
-            {/* 9. Floating WhatsApp Widget Support Panel */}
-            <div className="fixed bottom-8 right-8 z-[100] font-noto-sans flex flex-col items-end gap-3 pointer-events-none">
+            <div className="w-full max-w-4xl mx-auto p-4 space-y-6">
 
-                {/* Chat Drawer Widget Panel */}
-                {/* <AnimatePresence>
+                {/* Primary Display (First 2 Offers Shown) */}
+
+
+                {/* Modal Overlay Sheet */}
+                <AnimatePresence>
+                    {offerOpen && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+
+                            {/* Backdrop Background Click-to-Dismiss */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setBrochureOpen(false)}
+                                className="absolute inset-0 bg-black/60 backdrop-blur-xs"
+                            />
+
+                            {/* Modal Pop Card Content container */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                                className="relative bg-white rounded-[36px] max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-gray-200 z-10 space-y-4"
+                            >
+                                <button
+                                    title="close"
+                                    onClick={() => setOfferOpen(false)}
+                                    className="absolute top-5 right-5 p-2 text-gray-400 hover:text-gray-700 cursor-pointer transition-colors"
+                                >
+                                    <X className="h-5 w-5" />
+                                </button>
+
+                                <h3 className="text-xl font-bold text-gray-900 tracking-tight pb-2 border-b border-gray-100">
+                                    Additional Premium Tiers
+                                </h3>
+
+                                {/* Remaining locked offers directly shown without forms */}
+                                <div className="space-y-3">
+                                    <Image src={"https://res.cloudinary.com/drd6gndvh/image/upload/v1782210697/offer_qhgky9.png"} width={1000} height={1000} alt="offer image" />
+                                </div>
+                                <div className="text-center">
+                                    <Link
+                                        href={'/offers'}
+                                        className="bg-[#056E00] hover:bg-[#045200] text-white font-bold px-6 py-3 rounded-xl transition-all duration-200 cursor-pointer text-sm shadow-sm"
+                                    >
+                                        View More Offers
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        </div>
+                    )}
+                </AnimatePresence>
+            </div>
+
+
+            {/* 9. Floating WhatsApp Widget Support Panel */}
+            {/* Chat Drawer Widget Panel */}
+            {/* <AnimatePresence>
           {chatOpen && (
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -507,19 +590,8 @@ export default function App() {
             </motion.div>
           )}
         </AnimatePresence> */}
+            {/* instagram */}
 
-                {/* The Action green WhatsApp Pill Button itself */}
-                <a
-                    // onClick={() => setChatOpen(!chatOpen)}
-                    href={`https://wa.me/916262777411?text=${message}`}
-                    className="relative flex items-center justify-center w-16 h-16 bg-[#25D366] text-[#ffffff] rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer pointer-events-auto"
-                    aria-label="Open Assistance Chat"
-                >
-                    <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>
-                    <MessageCircle className="h-8 w-8 relative z-10 text-white fill-current" />
-                </a>
-
-            </div>
 
         </div>
     );
