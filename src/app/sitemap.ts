@@ -50,10 +50,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.8,
         },
         {
-            url: `${baseUrl}/contact`,
+            url: `${baseUrl}/aboutus`,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.5,
+            changeFrequency: 'daily',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/offers`,
+            lastModified: new Date(),
+            changeFrequency: 'daily',
+            priority: 0.8,
         },
         ...propertiesUrls // Agar API fail bhi ho, toh purane static pages render honge
     ]
