@@ -9,10 +9,11 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     const navItems = [
-        { id: 1, path: "/", label: "Townships" },
-        { id: 2, path: "/", label: "EMI Plans" },
+        { id: 1, path: "/", label: "Home" },
+        { id: 2, path: "/", label: "Map Layout" },
         { id: 3, path: "/", label: "Ownership Process" },
         { id: 4, path: "/", label: "Contact Us" },
+        { id: 5, path: "/aboutus", label: "About Us" },
     ];
 
     return (

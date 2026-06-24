@@ -112,13 +112,14 @@ export default function Hero({ onExplore, onOpenBrochure, language }: HeroProps)
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 pt-2"
           >
-            <Link
-              href={"/properties"}
+            <button
+              title="explore"
+              onClick={onExplore}
               className="bg-primary-orange text-white px-8 py-4.5 organic-radius text-sm md:text-base font-bold flex items-center justify-center gap-2.5 hover:bg-primary-orange/90 active:scale-[0.98] transition-all shadow-lg shadow-primary-orange/20 cursor-pointer"
             >
               <span>{t.exploreBtn}</span>
               <ArrowRight className="h-5 w-5" />
-            </Link>
+            </button>
             <button
               onClick={onOpenBrochure}
               className="glass-panel text-[#1a1c1c] hover:bg-white px-8 py-4.5 organic-radius text-sm md:text-base font-bold flex items-center justify-center gap-2.5 active:scale-[0.98] transition-all border border-[#dbc2b0] cursor-pointer"

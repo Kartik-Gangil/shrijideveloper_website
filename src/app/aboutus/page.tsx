@@ -87,7 +87,20 @@ export default function AboutUsPage() {
                             <p className="font-semibold text-gray-700 text-lg leading-relaxed m-0">
                                 Call Us at
                             </p>
+                            <div className="flex flex-wrap justify-center gap-2 text-lg font-bold text-[#056E00]">
+                                <p className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">
+                                    Vivek Agrawal
+                                </p>
+                                <span className="text-gray-300 font-normal">|</span>
+                                <p className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">
+                                    Rajesh Shrivastava
+                                </p>
+                                <span className="text-gray-300 font-normal">|</span>
+                                <p className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">
+                                    Mayank Agrawal
+                                </p>
 
+                            </div>
                             <div className="flex flex-wrap justify-center gap-2 text-lg font-bold text-[#056E00]">
                                 <a href="tel:6262777411" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777411</a>
                                 <span className="text-gray-300 font-normal">|</span>
