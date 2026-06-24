@@ -47,7 +47,7 @@ export default function Projects({ onInquireProject, language }: ProjectsProps) 
       size: "800 - 2500 Sq.Ft.",
       badge: language === "en" ? "Fast Selling" : "तेजी से बिक्री",
       badgeType: "selling",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuChY_mosXuE9Gp5vf959WjqP3QXaMcKhUFlWzzMofQbs4PaDBR3uPyjX5mshKaqcInXfEIQdYrPcX9CRVkk3MkDllKsBjngcxudEMPGtVisEK4w4mfztvvKGduE854UpDAkgMVu4meqxThU5kz-BIA1pNaCrH36AVCTllAE3gyoti2TaH1ATIn5dOBtuIKEs1CPM74r-r8YPd4gzi1hrItvF22ZqJQrP62ktVcIh-J9rQdZbaGuEEIZwmq7TkGrEFDBjGl5vT0V7Q0",
+      image: "https://res.cloudinary.com/drd6gndvh/image/upload/v1782237156/Screenshot_2026-06-23_232021_svikyt.png",
       teaser: t.teaserLucknow,
       amenities: t.amenitiesListLucknow,
       landmarks: t.landmarksLucknow,

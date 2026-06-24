@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../properties/component/Navbar";
 import { fetchLeads } from './action';
 import { isLoggedIn } from "@/utils/auth";
+import Link from "next/link";
 
 interface Plot {
   _id: string;
@@ -135,12 +136,21 @@ export default function AdminPropertyDashboard() {
               </p>
             </div>
 
-            <button
-              className="bg-[#A86300] text-white px-8 py-5 rounded-2xl shadow-md font-semibold hover:cursor-pointer"
-              onClick={() => router.push("/dashboard/addProperty")}
-            >
-              ＋ Add New Property
-            </button>
+            <div className="flex gap-2">
+              <Link
+                className="bg-[#A86300] text-white px-8 text-center py-7 rounded-2xl shadow-md font-semibold hover:cursor-pointer"
+                href="/dashboard/addImage"
+              >
+                ＋ New Image to gallery
+              </Link>
+
+              <Link
+                className="bg-[#A86300] text-white text-center px-8 py-7 rounded-2xl shadow-md font-semibold hover:cursor-pointer"
+                href="/dashboard/addProperty"
+              >
+                ＋ Add New Property
+              </Link>
+            </div>
           </div>
 
           {/* SEARCH BAR */}
@@ -201,8 +211,8 @@ export default function AdminPropertyDashboard() {
                   <div>
                     <span
                       className={`px-4 py-2 rounded-full text-sm ${item.status === "available"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-gray-100 text-gray-600"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-gray-100 text-gray-600"
                         }`}
                     >
                       ● {item.status}
@@ -286,80 +296,82 @@ export default function AdminPropertyDashboard() {
           </div>
 
         </div>
-      </section>
+      </section >
 
       {/* LEADS ENQUIRY MODAL WITH DATA TABLE */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-          <div className="bg-white w-full max-w-2xl rounded-3xl p-6 relative max-h-[85vh] flex flex-col shadow-2xl">
-            <div className="flex justify-between items-center pb-4 border-b">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">Active Lead Enquiries</h2>
-                <p className="text-sm text-gray-500 mt-1">Real-time interest recorded from investors</p>
-              </div>
-              <button
-                title="close"
-                onClick={() => setIsOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-full transition cursor-pointer text-gray-500 hover:text-black"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className="overflow-y-auto mt-4 flex-1 rounded-xl border border-gray-100">
-              {modalData && modalData.length > 0 ? (
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-[#FAF7F4] text-xs font-bold text-gray-700 tracking-wider">
-                      <th className="px-6 py-4">#</th>
-                      <th className="px-6 py-4">USER NAME</th>
-                      <th className="px-6 py-4">PHONE NUMBER</th>
-                      <th className="px-6 py-4 text-center">Call</th>
-                      <th className="px-6 py-4 text-center">Whatsapp</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100 text-sm text-gray-800">
-                    {modalData.map((lead, idx) => (
-                      <tr key={lead._id || idx} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-6 py-4 text-gray-400 font-medium">{idx + 1}</td>
-                        <td className="px-6 py-4 font-semibold text-gray-900">{lead.name}</td>
-                        <td className="px-6 py-4">
-                          <a href={`tel:${lead.phone}`} className="text-[#A86300] font-medium hover:underline">
-                            {lead.phone}
-                          </a>
-                        </td>
-                        <td className="px-6 py-4 text-center">
-                          <a href={`tel:${lead.phone}`} className="inline-block p-2 hover:bg-amber-50 rounded-full text-[#A86300] transition">
-                            <Phone size={18} />
-                          </a>
-                        </td>
-                        <td className="px-6 py-4 text-center">
-                          <a href={`https://wa.me/91${lead.phone}?text=Hello! How Can I help you ${lead.name}`} className="inline-block p-2 hover:bg-green-50 rounded-full text-green-600 transition">
-                            <MessageCircle size={18} />
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <div className="p-10 text-center text-gray-500">
-                  {!actionLoader && "No dynamic active leads found at this time."}
+      {
+        isOpen && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+            <div className="bg-white w-full max-w-2xl rounded-3xl p-6 relative max-h-[85vh] flex flex-col shadow-2xl">
+              <div className="flex justify-between items-center pb-4 border-b">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">Active Lead Enquiries</h2>
+                  <p className="text-sm text-gray-500 mt-1">Real-time interest recorded from investors</p>
                 </div>
-              )}
-            </div>
+                <button
+                  title="close"
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition cursor-pointer text-gray-500 hover:text-black"
+                >
+                  <X size={20} />
+                </button>
+              </div>
 
-            <div className="pt-4 border-t mt-4 flex justify-end">
-              <button
-                onClick={() => setIsOpen(false)}
-                className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-sm font-medium transition cursor-pointer"
-              >
-                Close
-              </button>
+              <div className="overflow-y-auto mt-4 flex-1 rounded-xl border border-gray-100">
+                {modalData && modalData.length > 0 ? (
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-[#FAF7F4] text-xs font-bold text-gray-700 tracking-wider">
+                        <th className="px-6 py-4">#</th>
+                        <th className="px-6 py-4">USER NAME</th>
+                        <th className="px-6 py-4">PHONE NUMBER</th>
+                        <th className="px-6 py-4 text-center">Call</th>
+                        <th className="px-6 py-4 text-center">Whatsapp</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 text-sm text-gray-800">
+                      {modalData.map((lead, idx) => (
+                        <tr key={lead._id || idx} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-4 text-gray-400 font-medium">{idx + 1}</td>
+                          <td className="px-6 py-4 font-semibold text-gray-900">{lead.name}</td>
+                          <td className="px-6 py-4">
+                            <a href={`tel:${lead.phone}`} className="text-[#A86300] font-medium hover:underline">
+                              {lead.phone}
+                            </a>
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            <a href={`tel:${lead.phone}`} className="inline-block p-2 hover:bg-amber-50 rounded-full text-[#A86300] transition">
+                              <Phone size={18} />
+                            </a>
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            <a href={`https://wa.me/91${lead.phone}?text=Hello! How Can I help you ${lead.name}`} className="inline-block p-2 hover:bg-green-50 rounded-full text-green-600 transition">
+                              <MessageCircle size={18} />
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <div className="p-10 text-center text-gray-500">
+                    {!actionLoader && "No dynamic active leads found at this time."}
+                  </div>
+                )}
+              </div>
+
+              <div className="pt-4 border-t mt-4 flex justify-end">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-sm font-medium transition cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </>
   );
 }

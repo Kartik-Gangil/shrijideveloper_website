@@ -29,9 +29,9 @@ export default function Hero({ onExplore, onOpenBrochure, language }: HeroProps)
 
   const image = [
     "https://i.pinimg.com/736x/3f/6c/df/3f6cdfe481c871e243946b8e69010a5d.jpg",
-    "https://www.shutterstock.com/image-illustration/3d-rendering-park-design-aerial-260nw-2206187975.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXoVAYjpNAsHzjwSTT8MkrBWoG4r_ofZVEOqxYgtzBppPAmx3qCT8pPbg&s=10",
-    "https://westdelhiclubsociety.in/wp-content/uploads/2022/09/Swiming-Pool.jpg"
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZYqbAg6Fj87ofHyJSEXMjaEqtbLdHHpK4fQ&s",
+    "https://westdelhiclubsociety.in/wp-content/uploads/2022/09/Swiming-Pool.jpg",
+    "https://c.pxhere.com/photos/0b/87/gym_wieghts_fitness_sport_equipment-789679.jpg!d"
   ];
 
   return (

@@ -71,12 +71,19 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
               {item.label}
             </button>
           ))}
-          <Link
+          {/* <Link
             href={"/properties"}
             className={`pb-1 transition-all cursor-pointer border-b-2 hover:text-secondary-green "text-[#554336] border-transparent hover:border-[#dbc2b0]"
               }`}
           >
             Properties
+          </Link> */}
+          <Link
+            href={"/gallery"}
+            className={`pb-1 transition-all cursor-pointer border-b-2 hover:text-secondary-green "text-[#554336] border-transparent hover:border-[#dbc2b0]"
+              }`}
+          >
+            Gallery
           </Link>
 
 

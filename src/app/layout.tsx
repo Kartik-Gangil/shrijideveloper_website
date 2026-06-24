@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "ShriJi Developers | Premium Residential Plots & Nature-Forward Heritage Living",
+      "ShriJi Developers - ShriJi Enclave Township Morena",
     template: "%s | ShriJi Developers",
   },
 
@@ -135,7 +135,7 @@ export const metadata: Metadata = {
     siteName: "ShriJi Developers",
 
     title:
-      "ShriJi Developers | Premium Residential Plots & Heritage Living",
+      "ShriJi Developers - ShriJi Enclave Township Morena",
 
     description:
       "Own premium residential plots with modern amenities, transparent legal documentation, and flexible payment plans.",
@@ -154,7 +154,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
 
     title:
-      "ShriJi Developers | Premium Residential Plots & Heritage Living",
+      "ShriJi Developers - ShriJi Enclave Township Morena",
 
     description:
       "Explore premium residential plots designed for modern and sustainable living.",

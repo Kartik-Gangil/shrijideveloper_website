@@ -10,7 +10,7 @@ interface CoreValue {
 }
 
 export const metadata = {
-    title: 'About Us | ShriJi Developers',
+    title: 'About Us , ShriJi Developers',
     description: 'Learn about ShriJi Developers, our mission, vision, and flagship RERA-approved project, ShriJi Enclave. Building modern, sustainable, and value-driven communities.',
 };
 
@@ -33,7 +33,7 @@ export default function AboutUsPage() {
 
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <div className="bg-emerald-50/40 min-h-screen pt-5 font-sans text-gray-800">
 
                 {/* Hero Section */}
@@ -65,7 +65,8 @@ export default function AboutUsPage() {
                         <div className="relative h-72 md:h-96 w-full rounded-xl overflow-hidden shadow-lg bg-green-50 border border-green-100 organic-radius ">
                             {/* Replace with your actual image path */}
                             <div className="absolute inset-0 flex items-center justify-center bg-[#056E00]/5 text-[#056E00] font-semibold">
-                                [ ShriJi Developers Township Concept Image ]
+                                <Image src={"https://res.cloudinary.com/drd6gndvh/image/upload/v1782237156/Screenshot_2026-06-23_232021_svikyt.png"} width={1000} height={1000} alt='[ ShriJi Developers Township Concept Image ]' />
+
                             </div>
                         </div>
                     </div>
@@ -82,6 +83,21 @@ export default function AboutUsPage() {
                             ShriJi Enclave is a landmark development and one of the region's pioneering
                             <strong className="text-[#056E00] font-bold"> RERA-approved townships</strong>. Developed with all necessary approvals and a commitment to transparency, ShriJi Enclave reflects our vision of delivering reliable and future-ready residential destinations.
                         </p>
+                        <div className="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 border border-gray-100 rounded-xl shadow-sm max-w-3xl mx-auto">
+                            <p className="font-semibold text-gray-700 text-lg leading-relaxed m-0">
+                                Call Us at
+                            </p>
+
+                            <div className="flex flex-wrap justify-center gap-2 text-lg font-bold text-[#056E00]">
+                                <a href="tel:6262777411" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777411</a>
+                                <span className="text-gray-300 font-normal">|</span>
+                                <a href="tel:6262777412" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777412</a>
+                                <span className="text-gray-300 font-normal">|</span>
+                                <a href="tel:6262777413" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777413</a>
+                                <span className="text-gray-300 font-normal">|</span>
+                                <a href="tel:6262777414" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777414</a>
+                            </div>
+                        </div>
                         <p className="text-sm text-gray-500 italic max-w-2xl mx-auto">
                             "At ShriJi Developers, we believe that trust is the foundation of every successful relationship. Through ethical business practices, clear documentation, and customer-centric service, we aim to become a preferred name in real estate development."
                         </p>

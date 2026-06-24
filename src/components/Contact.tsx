@@ -183,6 +183,21 @@ export default function Contact({ language }: ContactProps) {
           </div>
 
         </div>
+        <div className="flex flex-col items-center justify-center gap-2 p-4 bg-gray-50 border border-gray-100 rounded-xl shadow-sm max-w-3xl mx-auto">
+          <p className="font-semibold text-gray-700 text-lg leading-relaxed m-0">
+            Call Us at
+          </p>
+         
+          <div className="flex flex-wrap justify-center gap-2 text-lg font-bold text-[#056E00]">
+            <a href="tel:6262777411" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777411</a>
+            <span className="text-gray-300 font-normal">|</span>
+            <a href="tel:6262777412" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777412</a>
+            <span className="text-gray-300 font-normal">|</span>
+            <a href="tel:6262777413" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777413</a>
+            <span className="text-gray-300 font-normal">|</span>
+            <a href="tel:6262777414" className="border-b-2 border-transparent hover:border-[#056E00] transition-colors ease-in-out duration-300 pb-0.5">6262777414</a>
+          </div>
+        </div>
 
       </div>
 
