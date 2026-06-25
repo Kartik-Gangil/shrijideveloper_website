@@ -219,7 +219,7 @@ export default function RootLayout({
         <meta name="geo.country" content="India" />
 
         {/* Schema.org Structured Data */}
-        <S
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(realEstateSchema),
