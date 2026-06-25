@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import Script from "next/script";
 
 const beVietnamPro = Be_Vietnam_Pro({
   variable: "--font-be-vietnam-pro",
@@ -218,17 +219,18 @@ export default function RootLayout({
         <meta name="geo.country" content="India" />
 
         {/* Schema.org Structured Data */}
-        <script
+        <S
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(realEstateSchema),
           }}
         />
       </head>
+
       <body className="min-h-screen bg-background text-on-surface selection:bg-secondary-container selection:text-on-secondary-container font-body-md">
         {children}
 
-        
+
         <div className="fixed bottom-8 right-8 z-[100] font-noto-sans flex flex-col items-end gap-3 pointer-events-none">
           {/* instagram */}
           <a
@@ -264,6 +266,15 @@ export default function RootLayout({
 
 
         </div>
+        {/* <!-- Google tag (gtag.js) --> */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-J977RF82JJ"></Script>
+        <Script id="google-analytics" strategy="afterInteractive">
+          {` window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-J977RF82JJ');`}
+        </Script>
       </body>
     </html>
   );

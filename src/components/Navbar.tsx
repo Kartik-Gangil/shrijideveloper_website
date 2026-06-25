@@ -151,11 +151,17 @@ export default function Navbar({ onNavigate, activeSection, language = 'hi', onT
                   {item.label}
                 </button>
               ))}
-              <Link
+              {/* <Link
                 href={"/properties"}
                 className={`text-left py-2 hover:text-secondary-green border-b border-[#dbc2b0]/1 text-[#554336]`}
               >
                 Properties
+              </Link> */}
+              <Link
+                href={"/gallery"}
+                className={`text-left py-2 hover:text-secondary-green border-b border-[#dbc2b0]/1 text-[#554336]`}
+              >
+                Gallery
               </Link>
               <div className="pt-2 text-center text-xs text-[#554336]/60">
                 {t.verifiedLayouts}
