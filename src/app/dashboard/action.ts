@@ -13,6 +13,8 @@ export async function fetchLeads() {
         {
             name: String(u.name).toLowerCase() === 'null' ? '' : u.name?.toString() || '',
             phone: u.phone?.toString() || '',
+            date: u.createdAt ? new Date(u.createdAt as any).toLocaleDateString() : '',
+            time: u.createdAt ? new Date(u.createdAt as any).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '',
         }
     ));
 }

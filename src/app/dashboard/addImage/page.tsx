@@ -2,6 +2,7 @@
 import Footer from '@/app/properties/component/Footer';
 import Navbar from '@/app/properties/component/Navbar';
 import { Trash, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 interface GalleryItem {
@@ -232,7 +233,10 @@ const Page = () => {
                                         className={`break-inside-avoid bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group relative ${isDeleting ? "opacity-40 scale-95 pointer-events-none" : ""
                                             }`}
                                     >
-                                        <img
+                                        <Image
+                                            width={1000}
+                                            height={1000}
+                                            quality={75}
                                             src={img.image}
                                             alt={img.title}
                                             className="w-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.02]"

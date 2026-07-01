@@ -21,7 +21,11 @@ export function getToken(): string | null {
 
 export function removeToken() {
     try {
-        if (typeof window !== 'undefined') localStorage.removeItem(TOKEN_KEY);
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(TOKEN_KEY) 
+            // remove cookie token
+            document.cookie = `admin_token=; path=/; max-age=0`;
+        };
     } catch (e) {
         console.warn('Failed to remove token', e);
     }

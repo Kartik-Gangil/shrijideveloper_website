@@ -3,6 +3,7 @@ import Footer from "../properties/component/Footer";
 import Navbar from "../properties/component/Navbar";
 import GalleryModel from "@/model/Gallery";
 import DownloadButton from "./component/DownloadBTN";
+import Image from "next/image";
 
 interface IMAGE {
     title: string;
@@ -59,9 +60,12 @@ const Page = async () => {
                             key={i}
                             className="break-inwhite rounded-xl overflow-shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group relative"
                         >
-                            <img
+                            <Image
                                 src={img.image}
                                 alt={img.title}
+                                width={1000}
+                                height={1000}
+                                quality={75}
                                 className="w-full object-cover rounded-xl"
                             />
 

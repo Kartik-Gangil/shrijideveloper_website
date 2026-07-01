@@ -1,7 +1,9 @@
 import mongoose, { Model, Schema } from "mongoose";
 export interface User {
-    name: String;
-    phone: String;
+    name: string;
+    phone: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 const UserSchema = new Schema<User>(

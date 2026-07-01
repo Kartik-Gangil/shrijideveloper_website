@@ -51,6 +51,15 @@ export default function Contact({ language }: ContactProps) {
         });
         setData({ name: "", phone: "" });
       }
+      else {
+        setStatus({
+          open: true,
+          type: "success",
+          message:
+            "We already have your information. we will get back to you soon.",
+        });
+        setData({ name: "", phone: "" });
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       setStatus({

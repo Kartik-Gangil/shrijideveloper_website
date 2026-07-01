@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Navbar from "../properties/component/Navbar";
 import { fetchLeads } from './action';
-import { isLoggedIn } from "@/utils/auth";
+import { isLoggedIn, removeToken } from "@/utils/auth";
 import Link from "next/link";
 
 interface Plot {
@@ -31,12 +31,14 @@ interface Lead {
   name: string;
   phone: string;
   email?: string;
-  createdAt?: string;
+  date?: string;
+  time?: string;
 }
 
 export default function AdminPropertyDashboard() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState<Lead[] | null>(null);
+
   const [dataFrame, setDataFrame] = useState<DashboardData>({
     plot: [],
     PlotCount: 0,
@@ -136,20 +138,50 @@ export default function AdminPropertyDashboard() {
               </p>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+
               <Link
-                className="bg-[#A86300] text-white px-8 text-center py-7 rounded-2xl shadow-md font-semibold hover:cursor-pointer"
                 href="/dashboard/addImage"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 
+               bg-[#A86300] text-white 
+               px-5 sm:px-6 py-3 sm:py-4 
+               rounded-xl shadow-md 
+               font-medium 
+               transition-all duration-200 
+               hover:bg-[#8a5200] hover:shadow-lg active:scale-95"
               >
-                ＋ New Image to gallery
+                ＋ New Image
               </Link>
 
               <Link
-                className="bg-[#A86300] text-white text-center px-8 py-7 rounded-2xl shadow-md font-semibold hover:cursor-pointer"
                 href="/dashboard/addProperty"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 
+               bg-[#A86300] text-white 
+               px-5 sm:px-6 py-3 sm:py-4 
+               rounded-xl shadow-md 
+               font-medium 
+               transition-all duration-200 
+               hover:bg-[#8a5200] hover:shadow-lg active:scale-95"
               >
-                ＋ Add New Property
+                ＋ Add Property
               </Link>
+
+              <button
+                className="w-full sm:w-auto flex items-center justify-center gap-2 
+               bg-red-600 text-white 
+               px-5 sm:px-6 py-3 sm:py-4 
+               rounded-xl shadow-md 
+               font-medium 
+               transition-all duration-200 
+               hover:bg-red-700 hover:shadow-lg active:scale-95"
+                onClick={() => {
+                  removeToken()
+                  router.replace('/');
+                }}
+              >
+                Logout
+              </button>
+
             </div>
           </div>
 
@@ -327,6 +359,8 @@ export default function AdminPropertyDashboard() {
                         <th className="px-6 py-4">PHONE NUMBER</th>
                         <th className="px-6 py-4 text-center">Call</th>
                         <th className="px-6 py-4 text-center">Whatsapp</th>
+                        <th className="px-6 py-4 text-center">Date</th>
+                        <th className="px-6 py-4 text-center">Time</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 text-sm text-gray-800">
@@ -348,6 +382,12 @@ export default function AdminPropertyDashboard() {
                             <a href={`https://wa.me/91${lead.phone}?text=Hello! How Can I help you ${lead.name}`} className="inline-block p-2 hover:bg-green-50 rounded-full text-green-600 transition">
                               <MessageCircle size={18} />
                             </a>
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            {lead.date}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            {lead.time}
                           </td>
                         </tr>
                       ))}

@@ -18,12 +18,12 @@ const nextConfig: NextConfig = {
       //   hostname: "images.unsplash.com",
 
       // },
-      // {
-      //   protocol: "https",
+      {
+        protocol: "https",
 
-      //   hostname: "res.cloudinary.com",
+        hostname: "res.cloudinary.com",
 
-      // },
+      },
       // {
       //   protocol: "https",
 
