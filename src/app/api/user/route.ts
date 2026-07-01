@@ -25,7 +25,7 @@ export async function POST(request: Request) {
                 { error: "User with this phone number already exists" },
                 { status: 400 });
         }
-        const newUser = await UserModel.create({
+        const newUser = await UserModel.insertOne({
             name: body.name,
             phone: body.phone,
         });
